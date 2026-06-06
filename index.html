@@ -24,15 +24,23 @@
         html {
             scroll-behavior: smooth;
         }
+        /* ボタンのぷるぷるアニメーション（目立たせる用） */
+        @keyframes pulse-gentle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .animate-pulse-gentle {
+            animation: pulse-gentle 2s infinite ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-[#FFFDF9] text-gray-800 flex flex-col min-h-screen">
 
     <!-- 多言語テキスト定義 (JavaScriptで切り替え) -->
     <span id="lang-data" class="hidden" 
-          data-ja='{"home":"ホーム","about":"教室について","classes":"クラス案内","access":"アクセス","faq":"よくある質問","contact":"お問い合わせ","hero-title":"みんなの家 日本語教室","hero-subtitle":"公的で安心、どなたでも無料で学べる日本語教室","hero-desc":"「みんなの家」は、地域に住む外国人のための、公的な無料日本語教室です。市や地域社会と連携し、安心して楽しく日本語を学べる環境を提供しています。","btn-more":"詳しくみる","btn-join":"参加を申し込む","about-title":"教室について","about-desc1":"「みんなの家」は、公的機関が運営・サポートする安心の日本語教室です。日本語の勉強だけでなく、地域の生活情報も得られます。","about-desc2":"研修を受けたやさしい先生や地域のボランティアが、あなたのレベルに合わせて丁寧にサポートします。","feature1-title":"やさしい日本語","feature1-desc":"むずかしい言葉は使いません。日常会話からスタートできます。","feature2-title":"公的なサポート","feature2-desc":"行政や地域と連携しているため、生活相談や情報収集もできて安心です。","feature3-title":"参加費は無料","feature3-desc":"すべてのクラス・イベントに無料で参加できます（教材費等もかかりません）。","class-title":"クラス案内","class-intro":"あなたのスケジュールやレベルに合わせて選べます。","class1-name":"にちようクラス（日曜）","class1-time":"毎週日曜日 10:00 - 12:00","class1-desc":"日常会話を中心に、買い物や病院で使う日本語を練習します。","class2-name":"すいようクラス（水曜）","class2-time":"毎週水曜日 14:00 - 15:30","class2-desc":"初心者向け。ひらがな、カタカナ、かんたんな挨拶から学びます。","class3-name":"おしゃべりカフェ","class3-time":"第2・第4土曜日 13:00 - 15:00","class3-desc":"テーマに沿ってフリートーク。お茶を飲みながら楽しく日本語でおしゃべりします。","price-info":"参加費：無料 (0円)","access-title":"アクセス・場所","access-place":"場所：つくばコミュニティセンター 2階 会議室","access-address":"住所：茨城県つくば市天久保 1-2-3","access-train":"（「つくば駅」から徒歩10分 / 駐車場あり）","contact-title":"お問い合わせ","contact-label-name":"お名前","contact-label-email":"メールアドレス","contact-label-msg":"メッセージ / 質問したいこと","contact-btn-submit":"送信する","contact-success":"メッセージを送信しました！ご連絡をお待ちください。","footer-rights":"© 2026 みんなの家 日本語教室. All rights reserved."}'
-          data-en='{"home":"Home","about":"About","classes":"Classes","access":"Access","faq":"FAQ","contact":"Contact","hero-title":"Minna no Ie","hero-subtitle":"An official, free Japanese language class for everyone","hero-desc":"\"Minna no Ie\" (Everyone’s House) is a public and free Japanese language class supported by the community. We provide a safe and warm environment for you to learn Japanese with peace of mind.","btn-more":"Read More","btn-join":"Join Us","about-title":"About Us","about-desc1":"\"Minna no Ie\" is a trusted, publicly supported Japanese class. Here, you can not only study Japanese but also get local community and living information.","about-desc2":"Trained volunteer teachers and local staff will kindly guide you according to your level. Beginners are very welcome!","feature1-title":"Easy Japanese","feature1-desc":"We don’t use difficult words. You can start from everyday communication.","feature2-title":"Public Support","feature2-desc":"As an official program, we can assist with living inquiries and connect you with local services.","feature3-title":"Completely Free","feature3-desc":"There is no tuition fee. All classes, textbooks, and activities are free of charge.","class-title":"Our Classes","class-intro":"Choose a class that fits your schedule and Japanese level.","class1-name":"Sunday Class","class1-time":"Every Sunday 10:00 - 12:00","class1-desc":"Focused on daily conversation. Practice Japanese for shopping and hospitals.","class2-name":"Wednesday Class","class2-time":"Every Wednesday 14:00 - 15:30","class2-desc":"For beginners. Learn Hiragana, Katakana, and basic greetings.","class3-name":"Talking Cafe","class3-time":"2nd & 4th Saturday 13:00 - 15:00","class3-desc":"Free talk based on topics. Chat while enjoying some tea and refreshments.","price-info":"Fee: Free (0 JPY)","access-title":"Access & Location","access-place":"Venue: Tsukuba Community Center, 2nd Floor, Meeting Room","access-address":"Address: 1-2-3 Amakubo, Tsukuba-shi, Ibaraki","access-train":"(10 minutes walk from Tsukuba Station / Parking available)","contact-title":"Contact Us","contact-label-name":"Name","contact-label-email":"Email Address","contact-label-msg":"Message / Questions","contact-btn-submit":"Send Message","contact-success":"Thank you! Your message has been sent. We will get back to you soon.","footer-rights":"© 2026 Minna no Ie Japanese Class. All rights reserved."}'
-          data-easy='{"home":"ほーむ","about":"きょうしつ について","classes":"くらす の あんない","access":"ばしょ","faq":"よくある しつもん","contact":"れんらくする","hero-title":"みんなのいえ にほんごきょうしつ","hero-subtitle":"こうてき（まちの）の むりょう（０えん）にほんごきょうしつ","hero-desc":"「みんなのいえ」は、まち（こうてき）の むりょうの にほんごきょうしつ です。あんしんして たのしく にほんごを べんきょう することができます。","btn-more":"くわしく みる","btn-join":"さんかしたい","about-title":"きょうしつ について","about-desc1":"「みんなのいえ」は、まち（こうてき）が サポート（さぽーと）している にほんごきょうしつ です。にほんごの べんきょうや、まちの くらしの ことを きくことができます。","about-desc2":"やさしい せんせいが、あなたに あわせて おしえます。にほんごが はじめての人も あんしんしてください。","feature1-title":"やさしい にほんご","feature1-desc":"むずかしい ことばは つかいません。かんたんな かいわから はじめます。","feature2-title":"あんしんの サポート","feature2-desc":"まち（こうてき）の きょうしつ なので、せいかつの なやみも そうだん できます。","feature3-title":"０えん（むりょう）","feature3-desc":"おかねは かかりません。テキスト（きょうかしょ）も むりょう です。","class-title":"くらす の あんない","class-intro":"あなたの すきな じかんに べんきょう できます。","class1-name":"にちようび クラス","class1-time":"毎週（まいしゅう）にちようび 10:00 - 12:00","class1-desc":"かいものの ときや、びょういんで つかう にほんごを れんしゅう します。","class2-name":"すいようび クラス","class2-time":"毎週（まいしゅう）すいようび 14:00 - 15:30","class2-desc":"はじめて にほんごを べんきょうする 人の クラスです。ひらがなから はじめます。","class3-name":"おしゃべり カフェ","class3-time":"第2・第4（だい２・だい４）どようび 13:00 - 15:00","class3-desc":"おちゃを のみながら、たのしく おしゃべりを します。","price-info":"おかね：０えん（むりょう）","access-title":"ばしょ（いく方法）","access-place":"ばしょ：つくばコミュニティセンター 2かい","access-address":"じゅうしょ：茨城県（いばらきけん）つくば市（し）天久保（あまくぼ） 1-2-3","access-train":"（つくば駅から 歩いて 10分 / 車をおく場所があります）","contact-title":"れんらくする（メール）","contact-label-name":"なまえ","contact-label-email":"メールアドレス","contact-label-msg":"メッセージ（ききたいこと）","contact-btn-submit":"おくる","contact-success":"メールをおくりました！へんじを まってくださいね。","footer-rights":"© 2026 みんなのいえ にほんごきょうしつ. All rights reserved."}'>
+          data-ja='{"home":"ホーム","about":"教室について","classes":"クラス案内","access":"アクセス","faq":"よくある質問","contact":"お問い合わせ","hero-title":"みんなの家 日本語教室","hero-subtitle":"公的で安心、どなたでも無料で学べる日本語教室","hero-desc":"「みんなの家」は、地域に住む外国人のための、公的な無料日本語教室です。市や地域社会と連携し、安心して楽しく日本語を学べる環境を提供しています。","btn-more":"詳しくみる","btn-join":"参加を申し込む","btn-reserve":"クラスを予約する（無料）","about-title":"教室について","about-desc1":"「みんなの家」は、公的機関が運営・サポートする安心の日本語教室です。日本語の勉強だけでなく、地域の生活情報も得られます。","about-desc2":"研修を受けたやさしい先生や地域のボランティアが、あなたのレベルに合わせて丁寧にサポートします。","feature1-title":"やさしい日本語","feature1-desc":"むずかしい言葉は使いません。日常会話からスタートできます。","feature2-title":"公的なサポート","feature2-desc":"行政や地域と連携しているため、生活相談や情報収集もできて安心です。","feature3-title":"参加費は無料","feature3-desc":"すべてのクラス・イベントに無料で参加できます（教材費等もかかりません）。","class-title":"クラス案内","class-intro":"あなたのスケジュールやレベルに合わせて選べます。","class1-name":"にちようクラス（日曜）","class1-time":"毎週日曜日 10:00 - 12:00","class1-desc":"日常会話を中心に、買い物や病院で使う日本語を練習します。","class2-name":"すいようクラス（水曜）","class2-time":"毎週水曜日 14:00 - 15:30","class2-desc":"初心者向け。ひらがな、カタカナ、かんたんな挨拶から学びます。","class3-name":"おしゃべりカフェ","class3-time":"第2・第4土曜日 13:00 - 15:00","class3-desc":"テーマに沿ってフリートーク。お茶を飲みながら楽しく日本語でおしゃべりします。","price-info":"参加費：無料 (0円)","access-title":"アクセス・場所","access-place":"場所：つくばコミュニティセンター 2階 会議室","access-address":"住所：茨城県つくば市天久保 1-2-3","access-train":"（「つくば駅」から徒歩10分 / 駐車場あり）","contact-title":"お問い合わせ","contact-label-name":"お名前","contact-label-email":"メールアドレス","contact-label-msg":"メッセージ / 質問したいこと","contact-btn-submit":"送信する","contact-success":"メッセージを送信しました！ご連絡をお待ちください。","footer-rights":"© 2026 みんなの家 日本語教室. All rights reserved.","badge-reserve":"ネットでかんたん予約！"}'
+          data-en='{"home":"Home","about":"About","classes":"Classes","access":"Access","faq":"FAQ","contact":"Contact","hero-title":"Minna no Ie","hero-subtitle":"An official, free Japanese language class for everyone","hero-desc":"\"Minna no Ie\" (Everyone’s House) is a public and free Japanese language class supported by the community. We provide a safe and warm environment for you to learn Japanese with peace of mind.","btn-more":"Read More","btn-join":"Join Us","btn-reserve":"Book a Class (Free)","about-title":"About Us","about-desc1":"\"Minna no Ie\" is a trusted, publicly supported Japanese class. Here, you can not only study Japanese but also get local community and living information.","about-desc2":"Trained volunteer teachers and local staff will kindly guide you according to your level. Beginners are very welcome!","feature1-title":"Easy Japanese","feature1-desc":"We don’t use difficult words. You can start from everyday communication.","feature2-title":"Public Support","feature2-desc":"As an official program, we can assist with living inquiries and connect you with local services.","feature3-title":"Completely Free","feature3-desc":"There is no tuition fee. All classes, textbooks, and activities are free of charge.","class-title":"Our Classes","class-intro":"Choose a class that fits your schedule and Japanese level.","class1-name":"Sunday Class","class1-time":"Every Sunday 10:00 - 12:00","class1-desc":"Focused on daily conversation. Practice Japanese for shopping and hospitals.","class2-name":"Wednesday Class","class2-time":"Every Wednesday 14:00 - 15:30","class2-desc":"For beginners. Learn Hiragana, Katakana, and basic greetings.","class3-name":"Talking Cafe","class3-time":"2nd & 4th Saturday 13:00 - 15:00","class3-desc":"Free talk based on topics. Chat while enjoying some tea and refreshments.","price-info":"Fee: Free (0 JPY)","access-title":"Access & Location","access-place":"Venue: Tsukuba Community Center, 2nd Floor, Meeting Room","access-address":"Address: 1-2-3 Amakubo, Tsukuba-shi, Ibaraki","access-train":"(10 minutes walk from Tsukuba Station / Parking available)","contact-title":"Contact Us","contact-label-name":"Name","contact-label-email":"Email Address","contact-label-msg":"Message / Questions","contact-btn-submit":"Send Message","contact-success":"Thank you! Your message has been sent. We will get back to you soon.","footer-rights":"© 2026 Minna no Ie Japanese Class. All rights reserved.","badge-reserve":"Easy Online Booking!"}'
+          data-easy='{"home":"ほーむ","about":"きょうしつ について","classes":"くらす の あんない","access":"ばしょ","faq":"よくある しつもん","contact":"れんらくする","hero-title":"みんなのいえ にほんごきょうしつ","hero-subtitle":"こうてき（まちの）の むりょう（０えん）にほんごきょうしつ","hero-desc":"「みんなのいえ」は、まち（こうてき）の むりょうの にほんごきょうしつ です。あんしんして たのしく にほんごを べんきょう することができます。","btn-more":"くわしく みる","btn-join":"さんかしたい","btn-reserve":"クラスの よやくを する（０えん）","about-title":"きょうしつ について","about-desc1":"「みんなのいえ」は、まち（こうてき）が サポート（さぽーと）している にほんごきょうしつ です。にほんごの べんきょうや、まちの くらしの ことを きくことができます。","about-desc2":"やさしい せんせいが、あなたに あわせて おしえます。にほんごが はじめての人も あんしんしてください。","feature1-title":"やさしい にほんご","feature1-desc":"むずかしい ことばは つかいません。かんたんな かいわから はじめます。","feature2-title":"あんしんの サポート","feature2-desc":"まち（こうてき）の きょうしつ なので、せいかつの なやみも そうだん できます。","feature3-title":"０えん（むりょう）","feature3-desc":"おかねは かかりません。テキスト（きょうかしょ）も むりょう です。","class-title":"くらす の あんない","class-intro":"あなたの すきな じかんに べんきょう できます。","class1-name":"にちようび クラス","class1-time":"毎週（まいしゅう）にちようび 10:00 - 12:00","class1-desc":"かいものの ときや、びょういんで つかう にほんごを れんしゅう します。","class2-name":"すいようび クラス","class2-time":"毎週（まいしゅう）すいようび 14:00 - 15:30","class2-desc":"はじめて にほんごを べんきょうする 人の クラスです。ひらがなから はじめます。","class3-name":"おしゃべり カフェ","class3-time":"第2・第4（だい２・だい４）どようび 13:00 - 15:00","class3-desc":"おちゃを のみながら、たのしく おしゃべりを します。","price-info":"おかね：０えん（むりょう）","access-title":"ばしょ（いく方法）","access-place":"ばしょ：つくばコミュニティセンター 2かい","access-address":"じゅうしょ：茨城県（いばらきけん）つくば市（し）天久保（あまくぼ） 1-2-3","access-train":"（つくば駅から 歩いて 10分 / 車をおく場所があります）","contact-title":"れんらくする（メール）","contact-label-name":"なまえ","contact-label-email":"メールアドレス","contact-label-msg":"メッセージ（ききたいこと）","contact-btn-submit":"おくる","contact-success":"メールをおくりました！へんじを まってくださいね。","footer-rights":"© 2026 みんなのいえ にほんごきょうしつ. All rights reserved.","badge-reserve":"スマホで かんたんよやく！"}'>
     </span>
 
     <!-- ヘッダー（ナビゲーション） -->
@@ -50,12 +58,18 @@
             </a>
 
             <!-- デスクトップ ナビゲーション -->
-            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+            <nav class="hidden md:flex space-x-6 text-sm font-medium items-center">
                 <a href="#about" class="text-gray-600 hover:text-orange-500 transition" data-t="about">教室について</a>
                 <a href="#classes" class="text-gray-600 hover:text-orange-500 transition" data-t="classes">クラス案内</a>
                 <a href="#access" class="text-gray-600 hover:text-orange-500 transition" data-t="access">アクセス</a>
                 <a href="#faq" class="text-gray-600 hover:text-orange-500 transition" data-t="faq">よくある質問</a>
-                <a href="#contact" class="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600 transition shadow-sm" data-t="contact">お問い合わせ</a>
+                
+                <!-- ヘッダーの目立つ予約リンク -->
+                <!-- 予約システムのURLをここに貼る (例: href="https://your-booking-system.com") -->
+                <a href="#contact" class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition shadow-sm font-bold flex items-center space-x-1" id="headerReserveLink">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span data-t="btn-reserve">クラスを予約する（無料）</span>
+                </a>
             </nav>
 
             <!-- 言語切り替え & モバイルメニューボタン -->
@@ -82,7 +96,13 @@
             <a href="#classes" onclick="toggleMobileMenu()" class="block text-gray-700 font-medium hover:text-orange-500" data-t="classes">クラス案内</a>
             <a href="#access" onclick="toggleMobileMenu()" class="block text-gray-700 font-medium hover:text-orange-500" data-t="access">アクセス</a>
             <a href="#faq" onclick="toggleMobileMenu()" class="block text-gray-700 font-medium hover:text-orange-500" data-t="faq">よくある質問</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="block bg-orange-500 text-white text-center py-2 rounded-lg font-medium hover:bg-orange-600" data-t="contact">お問い合わせ</a>
+            
+            <!-- モバイルメニュー内の予約ボタン -->
+            <!-- 予約システムのURLをここに貼る -->
+            <a href="#contact" onclick="toggleMobileMenu()" class="block bg-red-500 text-white text-center py-2.5 rounded-lg font-bold hover:bg-red-600 shadow" id="mobileReserveLink">
+                <i class="fa-solid fa-calendar-check mr-1"></i>
+                <span data-t="btn-reserve">クラスを予約する（無料）</span>
+            </a>
         </div>
     </header>
 
@@ -94,17 +114,30 @@
                 <span class="inline-block bg-orange-100 text-orange-700 text-xs md:text-sm px-3 py-1 rounded-full font-bold uppercase tracking-wider" data-t="hero-subtitle">
                     にほんごで はなそう、つながろう！
                 </span>
+                
                 <h1 class="font-friendly text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight" data-t="hero-title">
                     みんなの家 日本語教室
                 </h1>
+                
                 <p class="text-base md:text-lg text-gray-600 leading-relaxed max-w-xl mx-auto md:mx-0" data-t="hero-desc">
-                    「みんなの家」は、外国にルーツを持つ方や、地域に住む外国人のための、あたたかい日本語教室です。お茶を飲みながら、楽しく日本語を学びませんか？
+                    「みんなの家」は、外国にルーツを持つ方や、地域に住む外国人のための、あたたかい日本語教室です。お茶を drinking しながら、楽しく日本語を学びませんか？
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4 pt-2">
-                    <a href="#about" class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3.5 rounded-full font-bold shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 text-center" data-t="btn-more">
+
+                <!-- ★新規追加：超巨大＆目立つお申し込み/予約ボタン -->
+                <div class="pt-4 pb-2">
+                    <!-- 予約システムのURLをここに貼る (例: href="https://your-booking-system.com") -->
+                    <a href="https://liveproject-w6ny.onrender.com/index_ja.html" class="inline-flex items-center justify-center space-x-3 bg-red-500 hover:bg-red-600 text-white text-xl md:text-2xl font-bold px-8 py-5 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 animate-pulse-gentle w-full sm:w-auto" id="heroReserveLink">
+                        <i class="fa-solid fa-calendar-days text-2xl md:text-3xl"></i>
+                        <span data-t="btn-reserve">クラスを予約する（無料）</span>
+                    </a>
+                </div>
+
+                <!-- サブボタン -->
+                <div class="flex justify-center md:justify-start gap-4">
+                    <a href="#about" class="text-orange-600 hover:text-orange-700 bg-orange-50 hover:bg-orange-100 border border-orange-200 px-6 py-2.5 rounded-full font-semibold text-sm transition" data-t="btn-more">
                         詳しくみる
                     </a>
-                    <a href="#contact" class="bg-white hover:bg-orange-50 text-orange-600 border-2 border-orange-400 px-8 py-3.5 rounded-full font-bold shadow-md hover:shadow-lg transition transform hover:-translate-y-0.5 text-center" data-t="btn-join">
+                    <a href="#contact" class="text-gray-500 hover:text-gray-700 px-6 py-2.5 rounded-full font-semibold text-sm transition" data-t="btn-join">
                         参加を申し込む
                     </a>
                 </div>
@@ -117,7 +150,11 @@
                 <!-- イラスト代わりのグラフィック -->
                 <div class="relative bg-white p-6 rounded-3xl shadow-xl border border-orange-100 max-w-md w-full">
                     <div class="flex justify-between items-center mb-4">
-                        <span class="text-xs text-orange-500 font-bold"><i class="fa-solid fa-calendar-days mr-1"></i> Weekly Activity</span>
+                        <!-- 動的なネット予約誘導バッジ -->
+                        <span class="text-xs text-red-500 font-bold bg-red-50 px-2 py-1 rounded-lg border border-red-100 flex items-center animate-bounce">
+                            <i class="fa-solid fa-bolt mr-1"></i>
+                            <span data-t="badge-reserve">ネットでかんたん予約！</span>
+                        </span>
                         <div class="flex space-x-1">
                             <span class="w-2.5 h-2.5 bg-red-400 rounded-full"></span>
                             <span class="w-2.5 h-2.5 bg-yellow-400 rounded-full"></span>
@@ -301,7 +338,7 @@
 
                 <!-- 模擬マップ (Googleマップ風表示) -->
                 <div class="rounded-3xl overflow-hidden border-2 border-orange-100 shadow-md h-96 relative">
-                    <!-- 実際の位置情報ではなくシミュレートされたマップ。必要に応じて本物のiframeに入れ替え可能 -->
+                    <!-- 実際の位置情報ではなくシミュレートされたマップ -->
                     <div class="absolute inset-0 bg-blue-50 flex flex-col justify-center items-center p-4 text-center">
                         <i class="fa-solid fa-map-location-dot text-5xl text-orange-400 mb-3"></i>
                         <span class="font-friendly font-bold text-lg text-gray-800">みんなの家 日本語教室 はこちら</span>
@@ -402,7 +439,7 @@
                 </button>
             </form>
 
-            <!-- 送信完了メッセージ (送信後にJavaScriptで切り替え表示) -->
+            <!-- 送信完了メッセージ -->
             <div id="successMsg" class="hidden mt-6 bg-emerald-50 border border-emerald-200 text-emerald-800 p-6 rounded-3xl text-center shadow-sm">
                 <i class="fa-regular fa-circle-check text-4xl mb-3 text-emerald-500"></i>
                 <p class="font-bold text-lg mb-1" data-t="contact-success">メッセージを送信しました！ご連絡をお待ちください。</p>
@@ -468,9 +505,8 @@
             document.querySelectorAll('[data-t]').forEach(element => {
                 const key = element.getAttribute('data-t');
                 if (t[key]) {
-                    // inputやtextarea、buttonのプレースホルダー・テキスト切り替え用の特別対応
                     if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        // プレースホルダーの多言語対応は別途行うか、今回は簡略化のためそのまま
+                        // プレースホルダーの多言語対応は別途行う
                     } else {
                         element.innerText = t[key];
                     }
@@ -535,7 +571,7 @@
             form.classList.add('hidden');
             successMsg.classList.remove('hidden');
 
-            // 送信後、入力フィールドをクリア（必要であれば）
+            // 送信後、入力フィールドをクリア
             form.reset();
         }
 
