@@ -547,7 +547,7 @@
             </a>
 
             <!-- デスクトップ ナビゲーション -->
-            <nav class="hidden lg:flex space-x-5 text-sm font-medium items-center">
+            <nav class="hidden lg:flex space-x-3 text-sm font-medium items-center">
                 <a href="stella-east.html"
                     class="bg-teal-50 text-teal-700 hover:bg-teal-100 border border-teal-200 px-3.5 py-1.5 rounded-full transition font-bold text-xs flex items-center space-x-1.5">
                     <i class="fa-solid fa-graduation-cap"></i>
@@ -558,12 +558,11 @@
                     <i class="fa-solid fa-house-chimney-user"></i>
                     <span data-t="nav-minna">みんなのいえ教室</span>
                 </a>
-                <a href="#comparison" class="text-gray-600 hover:text-orange-600 transition"
-                    data-t="nav-compare">2教室の比較</a>
-                <a href="#features" class="text-gray-600 hover:text-orange-600 transition"
-                    data-t="nav-features">教室の特長</a>
-                <a href="#access" class="text-gray-600 hover:text-orange-600 transition" data-t="nav-access">アクセス・場所</a>
-                <a href="#faq" class="text-gray-600 hover:text-orange-600 transition" data-t="nav-faq">よくある質問</a>
+                <a href="volunteer.html"
+                    class="bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 px-3.5 py-1.5 rounded-full transition font-bold text-xs flex items-center space-x-1.5 animate-pulse-gentle">
+                    <i class="fa-solid fa-hands-holding-heart"></i>
+                    <span>ボランティア募集中</span>
+                </a>
             </nav>
 
             <!-- 言語切り替え & モバイルメニューボタン -->
@@ -598,18 +597,49 @@
                 <i class="fa-solid fa-house-chimney-user mr-1"></i>
                 <span data-t="nav-minna">みんなのいえ教室（亀久保）➔</span>
             </a>
-            <a href="#comparison" onclick="toggleMobileMenu()"
-                class="block text-gray-700 font-medium hover:text-orange-600" data-t="nav-compare">2教室の比較</a>
-            <a href="#features" onclick="toggleMobileMenu()"
-                class="block text-gray-700 font-medium hover:text-orange-600" data-t="nav-features">教室の特長</a>
-            <a href="#access" onclick="toggleMobileMenu()" class="block text-gray-700 font-medium hover:text-orange-600"
-                data-t="nav-access">アクセス・場所</a>
-            <a href="#faq" onclick="toggleMobileMenu()" class="block text-gray-700 font-medium hover:text-orange-600"
-                data-t="nav-faq">よくある質問</a>
+            <a href="volunteer.html" onclick="toggleMobileMenu()"
+                class="block bg-rose-500 text-white text-center py-2.5 rounded-xl font-bold hover:bg-rose-600 shadow">
+                <i class="fa-solid fa-hands-holding-heart mr-1"></i>
+                ボランティア募集中 ➔
+            </a>
         </div>
     </header>
 
+    <!-- ボランティア募集 告知バナー -->
+    <div class="relative bg-gradient-to-r from-rose-500 via-pink-500 to-orange-400 overflow-hidden">
+        <!-- 背景装飾ドット -->
+        <div class="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.15)_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none"></div>
+        <!-- 流れるアニメテキスト（モバイル非表示） -->
+        <div class="hidden md:block absolute inset-0 overflow-hidden pointer-events-none opacity-10 select-none">
+            <div class="whitespace-nowrap text-white text-6xl font-black leading-none animate-[marquee_20s_linear_infinite]">
+                ボランティア募集中&nbsp;&nbsp;&nbsp;ボランティア募集中&nbsp;&nbsp;&nbsp;ボランティア募集中&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+        <div class="relative z-10 max-w-6xl mx-auto px-4 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3 text-white">
+                <!-- 点滅アイコン -->
+                <span class="flex items-center justify-center w-8 h-8 bg-white/20 rounded-full shrink-0 animate-pulse">
+                    <i class="fa-solid fa-hands-holding-heart text-sm"></i>
+                </span>
+                <div>
+                    <span class="font-black text-sm md:text-base tracking-wide">
+                        🌍 日本語ボランティア大募集中！
+                    </span>
+                    <span class="hidden sm:inline text-white/90 text-xs md:text-sm ml-2">
+                        — 世界各国の外国人と交流しながら地域に貢献しませんか？経験不問・完全無料
+                    </span>
+                </div>
+            </div>
+            <a href="volunteer.html"
+                class="shrink-0 inline-flex items-center gap-2 bg-white text-rose-600 font-black text-xs md:text-sm px-5 py-2 rounded-full shadow-lg hover:bg-rose-50 hover:scale-105 transition-transform duration-200">
+                <i class="fa-solid fa-arrow-right"></i>
+                募集詳細を見る
+            </a>
+        </div>
+    </div>
+
     <!-- ヒーローセクション：2つの教室ポータルカード -->
+
     <section
         class="relative bg-gradient-to-b from-orange-50 via-amber-50/50 to-[#FFFDF9] py-12 md:py-20 overflow-hidden">
         <div
