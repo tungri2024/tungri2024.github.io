@@ -417,12 +417,17 @@
             const data = await fetchCalendarData(state.activityId, state.currentYearMonth, state.selectedDate);
             state.monthData = data;
 
-            // selectedDate の補完
-            if (!state.selectedDate && data.selectedDate) {
+            // selectedDate の補完：最も近い未来の有枠日を優先
+            if (!state.selectedDate && data.calendar) {
+                // 1) 今日以降で available な最初の日
+                const nextAvail = data.calendar.find(d => d.available && !d.isPast);
+                // 2) なければ APIが返した selectedDate
+                // 3) それもなければ月初
+                state.selectedDate = nextAvail
+                    ? nextAvail.date
+                    : (data.selectedDate || (data.calendar[0] || {}).date || null);
+            } else if (!state.selectedDate && data.selectedDate) {
                 state.selectedDate = data.selectedDate;
-            } else if (!state.selectedDate && data.calendar) {
-                const first = data.calendar.find(d => d.available && !d.isPast);
-                state.selectedDate = (first || data.calendar[0] || {}).date || null;
             }
 
             state.loading = false;
