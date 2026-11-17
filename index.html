@@ -270,6 +270,10 @@
             "a3":"A. 各カードの「開催日程カレンダー（無料）」ボタンから開催日程の確認が可能です。予約なしで直接会場にお越しいただくこともできます。",
             "q4":"Q. ふじみ野市外（富士見市や三芳町など）からも参加できますか？",
             "a4":"A. はい、近隣にお住まいの方や通勤・通学されている外国籍住民の方、お子様も大歓迎です！",
+            "nav-calendar":"開催カレンダー",
+            "cal-badge":"リアルタイム空き状況",
+            "cal-title":"開催日程・予約カレンダー",
+            "cal-lead":"希望の日程をタップして、各回の時間・空き枠数（残席）を確認し、そのまま完全無料でネット予約できます。",
             "footer-rights":"© 2026 ふじみ野市 無料日本語教室ポータル. All rights reserved."
         }' data-easy='{
             "portal-title":"ふじみ野市 にほんごきょうしつ ポータル",
@@ -333,6 +337,10 @@
             "a3":"A. 「ひにちのカレンダー（０円）」ボタンから ひにちの かくにんが できます。直接（ちょくせつ）会場に きても だいじょうぶです。",
             "q4":"Q. ふじみのし いがいに すんでいても だいじょうぶですか？",
             "a4":"A. はい、ふじみ市や みよし町など、ちかくに すんでいる 人も だいかんげいです！",
+            "nav-calendar":"カレンダー",
+            "cal-badge":"いまの あきじょうきょう",
+            "cal-title":"きょうしつの ひにち カレンダー",
+            "cal-lead":"ひにちを おすと、やっている じかんや あいている せきが わかります。",
             "footer-rights":"© 2026 ふじみ野市 無料日本語教室ポータル. All rights reserved."
         }'
         data-en='{
@@ -397,6 +405,10 @@
             "a3":"A. Online booking via the Calendar buttons above is recommended, but walk-ins are also welcome.",
             "q4":"Q. Can people living outside Fujimino City join?",
             "a4":"A. Yes! Residents of nearby cities such as Fujimi, Miyoshi, and Kawagoe are also warmly welcome.",
+            "nav-calendar":"Calendar",
+            "cal-badge":"Real-time Availability",
+            "cal-title":"Schedule & Booking Calendar",
+            "cal-lead":"Tap any date to check times, places, and open spots, and reserve your place for free.",
             "footer-rights":"© 2026 Fujimino Free Japanese Classes Portal. All rights reserved."
         }'
         data-zh='{
@@ -461,6 +473,10 @@
             "a3":"A. 可通过各卡片的「课程日历（免费）」按钮确认课程日期。也可直接前往会场参加，无需预约。",
             "q4":"Q. 富士见野市以外的居民（富士见市、三芳町等）也可以参加吗？",
             "a4":"A. 可以！热烈欢迎周边地区（富士见市、三芳町、川越市等）居住或通勤、通学的外国居民及儿童参加。",
+            "nav-calendar":"活动日历",
+            "cal-badge":"实时名额",
+            "cal-title":"课程日程与预约日历",
+            "cal-lead":"点击日期即可查看当天的活动场次、时间地点及剩余名额，并可直接免费在线预约。",
             "footer-rights":"© 2026 富士见野市免费日语教室门户. All rights reserved."
         }'
         data-vi='{
@@ -525,6 +541,10 @@
             "a3":"A. Bạn có thể kiểm tra lịch khai giảng qua nút Lịch khai giảng. Cũng có thể đến trực tiếp không cần đặt chỗ.",
             "q4":"Q. Người ở ngoài thành phố Fujimino (Fujimi, Miyoshi...) có tham gia được không?",
             "a4":"A. Được! Rất hoan nghênh cả cư dân và các em học sinh sinh sống, học tập tại các khu vực lân cận.",
+            "nav-calendar":"Lịch học",
+            "cal-badge":"Tình trạng chỗ",
+            "cal-title":"Lịch học & Đặt chỗ trực tuyến",
+            "cal-lead":"Nhấp vào ngày để kiểm tra thời gian học, số chỗ trống và đặt chỗ miễn phí ngay trên trang web.",
             "footer-rights":"© 2026 Cổng thông tin lớp tiếng Nhật miễn phí Fujimino. All rights reserved."
         }'>
     </span>
@@ -548,6 +568,11 @@
 
             <!-- デスクトップ ナビゲーション -->
             <nav class="hidden lg:flex space-x-3 text-sm font-medium items-center">
+                <a href="#calendar-section"
+                    class="bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-200 px-3.5 py-1.5 rounded-full transition font-bold text-xs flex items-center space-x-1.5 shadow-sm">
+                    <i class="fa-solid fa-calendar-days text-amber-600"></i>
+                    <span data-t="nav-calendar">開催日程カレンダー</span>
+                </a>
                 <a href="stella-east.html"
                     class="bg-teal-50 text-teal-700 hover:bg-teal-100 border border-teal-200 px-3.5 py-1.5 rounded-full transition font-bold text-xs flex items-center space-x-1.5">
                     <i class="fa-solid fa-graduation-cap"></i>
@@ -587,6 +612,11 @@
         <!-- モバイルナビゲーション -->
         <div id="mobileMenu"
             class="hidden lg:hidden bg-orange-50 border-t border-orange-100 px-4 py-4 space-y-3 shadow-inner">
+            <a href="#calendar-section" onclick="toggleMobileMenu()"
+                class="block bg-gradient-to-r from-amber-500 to-orange-500 text-white text-center py-2.5 rounded-xl font-bold hover:opacity-95 shadow">
+                <i class="fa-solid fa-calendar-days mr-1"></i>
+                <span data-t="nav-calendar">開催日程カレンダー（リアルタイム予約）</span> ➔
+            </a>
             <a href="stella-east.html" onclick="toggleMobileMenu()"
                 class="block bg-teal-600 text-white text-center py-2.5 rounded-xl font-bold hover:bg-teal-700 shadow">
                 <i class="fa-solid fa-graduation-cap mr-1"></i>
@@ -806,6 +836,28 @@
                 <i class="fa-solid fa-circle-info text-orange-500 shrink-0"></i>
                 <span>※ 予約システムのサーバー起動に約30秒ほど時間がかかる場合があります。ページが開くまでそのまま少々お待ちください。</span>
             </p>
+        </div>
+    </section>
+
+    <!-- 開催日程・リアルタイム予約カレンダーセクション -->
+    <section id="calendar-section" class="py-16 bg-gradient-to-b from-[#FFFDF9] via-amber-50/20 to-orange-50/30 border-t border-orange-100">
+        <div class="max-w-5xl mx-auto px-4">
+            <!-- セクション見出し -->
+            <div class="text-center max-w-2xl mx-auto mb-10 space-y-2">
+                <span class="inline-block bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider" data-t="cal-badge">
+                    <i class="fa-solid fa-bolt mr-1 text-teal-600"></i>リアルタイム空き状況
+                </span>
+                <h2 class="font-friendly text-2xl md:text-3xl font-bold text-gray-900" data-t="cal-title">
+                    開催日程・予約カレンダー
+                </h2>
+                <p class="text-xs md:text-sm text-gray-600" data-t="cal-lead">
+                    希望の日程をタップして、各回の時間・空き枠数（残席）を確認し、そのまま完全無料でネット予約できます。
+                </p>
+                <div class="w-12 h-1 bg-teal-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- カレンダーアプリマウント領域 -->
+            <div id="activity-calendar-app"></div>
         </div>
     </section>
 
@@ -1194,17 +1246,17 @@
                 <h4 class="font-bold text-white border-b border-gray-800 pb-2 text-sm">ネット予約（無料）</h4>
                 <ul class="space-y-2">
                     <li>
-                        <a href="https://fujimirv.jptungri.shop/group-activity-booking_ja.html?activityId=41"
+                        <a href="#calendar-section" onclick="if(window.JapaneseClassCalendar){window.JapaneseClassCalendar.selectActivity(41);}"
                             class="hover:text-white transition flex items-center space-x-1.5">
                             <i class="fa-solid fa-calendar-check text-teal-400"></i>
-                            <span>ふじみの日本語教室 開催日程・予約</span>
+                            <span>ふじみの日本語教室 開催日程・予約カレンダー</span>
                         </a>
                     </li>
                     <li>
-                        <a href="https://fujimirv.jptungri.shop/group-activity-booking_ja.html?activityId=28"
+                        <a href="#calendar-section" onclick="if(window.JapaneseClassCalendar){window.JapaneseClassCalendar.selectActivity(28);}"
                             class="hover:text-white transition flex items-center space-x-1.5">
                             <i class="fa-solid fa-calendar-check text-orange-400"></i>
-                            <span>みんなのいえ 開催日程・予約</span>
+                            <span>みんなのいえ 開催日程・予約カレンダー</span>
                         </a>
                     </li>
                 </ul>
@@ -1252,6 +1304,7 @@
             });
 
             document.getElementById('langSelect').value = lang;
+            window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
         }
 
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -1275,6 +1328,9 @@
             changeLanguage('ja');
         };
     </script>
+
+    <!-- 予約カレンダー スクリプト -->
+    <script src="calendar.js"></script>
 </body>
 
 </html>
