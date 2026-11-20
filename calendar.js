@@ -15,13 +15,13 @@
     // ─────────────────────────────────────────────
     const urlParams = new URLSearchParams(window.location.search);
     const API_BASE = urlParams.get('apiBase') ||
-                     localStorage.getItem('CALENDAR_API_BASE') ||
-                     window.CALENDAR_API_BASE ||
-                     'https://fujimirv.jptungri.shop';
+        localStorage.getItem('CALENDAR_API_BASE') ||
+        window.CALENDAR_API_BASE ||
+        'https://fujimirv.jptungri.shop';
 
     const ACTIVITIES = {
         STELLA: 41,  // ふじみの日本語教室（ステラ・イースト）
-        MINNA:  28   // みんなのいえ 日本語教室（亀久保）
+        MINNA: 28   // みんなのいえ 日本語教室（亀久保）
     };
 
     const DAY_OF_WEEK_INDEX = {
@@ -34,58 +34,58 @@
     // ─────────────────────────────────────────────
     const THEMES = {
         teal: {
-            headerGrad:    'linear-gradient(to right, #0f766e, #0d9488, #059669)',
-            borderColor:   '#0d9488',
-            bgLight:       '#f0fdfa',
-            bgMed:         '#ccfbf1',
-            textDark:      '#134e4a',
-            textMed:       '#0f766e',
-            badgeBg:       '#ccfbf1',
-            badgeText:     '#134e4a',
-            badgeBorder:   '#99f6e4',
-            btnGrad:       'linear-gradient(to right, #0d9488, #059669)',
-            btnGradHover:  'linear-gradient(to right, #0f766e, #047857)',
-            dotColor:      '#0d9488',
+            headerGrad: 'linear-gradient(to right, #0f766e, #0d9488, #059669)',
+            borderColor: '#0d9488',
+            bgLight: '#f0fdfa',
+            bgMed: '#ccfbf1',
+            textDark: '#134e4a',
+            textMed: '#0f766e',
+            badgeBg: '#ccfbf1',
+            badgeText: '#134e4a',
+            badgeBorder: '#99f6e4',
+            btnGrad: 'linear-gradient(to right, #0d9488, #059669)',
+            btnGradHover: 'linear-gradient(to right, #0f766e, #047857)',
+            dotColor: '#0d9488',
             activeTabText: '#134e4a',
-            ring:          '#99f6e4',
+            ring: '#99f6e4',
         },
         orange: {
-            headerGrad:    'linear-gradient(to right, #c2410c, #ea580c, #d97706)',
-            borderColor:   '#ea580c',
-            bgLight:       '#fff7ed',
-            bgMed:         '#fed7aa',
-            textDark:      '#7c2d12',
-            textMed:       '#c2410c',
-            badgeBg:       '#fed7aa',
-            badgeText:     '#7c2d12',
-            badgeBorder:   '#fdba74',
-            btnGrad:       'linear-gradient(to right, #ea580c, #d97706)',
-            btnGradHover:  'linear-gradient(to right, #c2410c, #b45309)',
-            dotColor:      '#ea580c',
+            headerGrad: 'linear-gradient(to right, #c2410c, #ea580c, #d97706)',
+            borderColor: '#ea580c',
+            bgLight: '#fff7ed',
+            bgMed: '#fed7aa',
+            textDark: '#7c2d12',
+            textMed: '#c2410c',
+            badgeBg: '#fed7aa',
+            badgeText: '#7c2d12',
+            badgeBorder: '#fdba74',
+            btnGrad: 'linear-gradient(to right, #ea580c, #d97706)',
+            btnGradHover: 'linear-gradient(to right, #c2410c, #b45309)',
+            dotColor: '#ea580c',
             activeTabText: '#7c2d12',
-            ring:          '#fdba74',
+            ring: '#fdba74',
         },
         indigo: {
-            headerGrad:    'linear-gradient(to right, #3730a3, #4f46e5, #2563eb)',
-            borderColor:   '#4f46e5',
-            bgLight:       '#eef2ff',
-            bgMed:         '#c7d2fe',
-            textDark:      '#1e1b4b',
-            textMed:       '#4338ca',
-            badgeBg:       '#c7d2fe',
-            badgeText:     '#1e1b4b',
-            badgeBorder:   '#a5b4fc',
-            btnGrad:       'linear-gradient(to right, #4f46e5, #2563eb)',
-            btnGradHover:  'linear-gradient(to right, #3730a3, #1d4ed8)',
-            dotColor:      '#4f46e5',
+            headerGrad: 'linear-gradient(to right, #3730a3, #4f46e5, #2563eb)',
+            borderColor: '#4f46e5',
+            bgLight: '#eef2ff',
+            bgMed: '#c7d2fe',
+            textDark: '#1e1b4b',
+            textMed: '#4338ca',
+            badgeBg: '#c7d2fe',
+            badgeText: '#1e1b4b',
+            badgeBorder: '#a5b4fc',
+            btnGrad: 'linear-gradient(to right, #4f46e5, #2563eb)',
+            btnGradHover: 'linear-gradient(to right, #3730a3, #1d4ed8)',
+            dotColor: '#4f46e5',
             activeTabText: '#1e1b4b',
-            ring:          '#a5b4fc',
+            ring: '#a5b4fc',
         }
     };
 
     function getTheme(activityId) {
         if (activityId === ACTIVITIES.STELLA) return THEMES.teal;
-        if (activityId === ACTIVITIES.MINNA)  return THEMES.orange;
+        if (activityId === ACTIVITIES.MINNA) return THEMES.orange;
         return THEMES.indigo;
     }
 
@@ -275,7 +275,7 @@
     // ─────────────────────────────────────────────
     function getDefaultActivityId() {
         if (urlParams.get('activityId')) return parseInt(urlParams.get('activityId'), 10);
-        if (window.DEFAULT_ACTIVITY_ID)   return window.DEFAULT_ACTIVITY_ID;
+        if (window.DEFAULT_ACTIVITY_ID) return window.DEFAULT_ACTIVITY_ID;
         if (window.location.pathname.includes('minna')) return ACTIVITIES.MINNA;
         return ACTIVITIES.STELLA;
     }
@@ -287,14 +287,14 @@
     }
 
     const state = {
-        activityId:        getDefaultActivityId(),
-        currentYearMonth:  getInitialYearMonth(),
-        selectedDate:      urlParams.get('date') || null,
-        monthData:         null,
-        loading:           false,
-        loadingSlots:      false,
-        error:             null,
-        cache:             {}
+        activityId: getDefaultActivityId(),
+        currentYearMonth: getInitialYearMonth(),
+        selectedDate: urlParams.get('date') || null,
+        monthData: null,
+        loading: false,
+        loadingSlots: false,
+        error: null,
+        cache: {}
     };
 
     // ─────────────────────────────────────────────
@@ -346,7 +346,7 @@
     // ─────────────────────────────────────────────
     function changeMonth(delta) {
         const [yearStr, monthStr] = state.currentYearMonth.split('-');
-        let year  = parseInt(yearStr, 10);
+        let year = parseInt(yearStr, 10);
         let month = parseInt(monthStr, 10) + delta;
         if (month > 12) { year += 1; month = 1; }
         else if (month < 1) { year -= 1; month = 12; }
@@ -367,7 +367,7 @@
 
     function selectActivity(activityId) {
         if (state.activityId === activityId) return;
-        state.activityId  = activityId;
+        state.activityId = activityId;
         state.selectedDate = null;
         loadCalendar();
     }
@@ -410,7 +410,7 @@
     // ─────────────────────────────────────────────
     async function loadCalendar() {
         state.loading = true;
-        state.error   = null;
+        state.error = null;
         renderLoadingUI();
 
         try {
@@ -449,11 +449,11 @@
 
         const th = getTheme(state.activityId);
         const isStella = state.activityId === ACTIVITIES.STELLA;
-        const isMinna  = state.activityId === ACTIVITIES.MINNA;
+        const isMinna = state.activityId === ACTIVITIES.MINNA;
         const isCustom = !isStella && !isMinna;
         const customTitle = (state.monthData && state.monthData.activity && state.monthData.activity.title)
-                            ? state.monthData.activity.title
-                            : `Activity #${state.activityId}`;
+            ? state.monthData.activity.title
+            : `Activity #${state.activityId}`;
 
         const [y, m] = state.currentYearMonth.split('-');
         const monthDisplay = `${y}年 ${parseInt(m, 10)}月`;
@@ -462,7 +462,7 @@
         const stellaTabStyle = isStella
             ? 'background:white;color:#134e4a;box-shadow:0 1px 3px rgba(0,0,0,.2);'
             : 'background:transparent;color:rgba(255,255,255,0.9);';
-        const minnaTabStyle  = isMinna
+        const minnaTabStyle = isMinna
             ? 'background:white;color:#7c2d12;box-shadow:0 1px 3px rgba(0,0,0,.2);'
             : 'background:transparent;color:rgba(255,255,255,0.9);';
 
@@ -769,10 +769,10 @@
 
         // イベントバインド
         document.getElementById('tab-btn-stella').addEventListener('click', () => selectActivity(ACTIVITIES.STELLA));
-        document.getElementById('tab-btn-minna').addEventListener('click',  () => selectActivity(ACTIVITIES.MINNA));
+        document.getElementById('tab-btn-minna').addEventListener('click', () => selectActivity(ACTIVITIES.MINNA));
         document.getElementById('cal-prev-month').addEventListener('click', () => changeMonth(-1));
         document.getElementById('cal-next-month').addEventListener('click', () => changeMonth(1));
-        document.getElementById('cal-today-btn').addEventListener('click',  resetToToday);
+        document.getElementById('cal-today-btn').addEventListener('click', resetToToday);
 
         // マウスオーバー効果（月ナビボタン）
         ['cal-prev-month', 'cal-next-month'].forEach(id => {
@@ -780,11 +780,11 @@
             if (!btn) return;
             btn.addEventListener('mouseenter', () => {
                 btn.style.borderColor = th.borderColor;
-                btn.style.background  = th.bgLight;
+                btn.style.background = th.bgLight;
             });
             btn.addEventListener('mouseleave', () => {
                 btn.style.borderColor = '#e5e7eb';
-                btn.style.background  = 'white';
+                btn.style.background = 'white';
             });
         });
 
@@ -811,7 +811,7 @@
         let html = `<div class="cal-wd-hdr">`;
         weekdays.forEach((wd, i) => {
             const c = i === 0 ? '#dc2626' : (i === 6 ? '#0284c7' : '#6b7280');
-            html += `<div style="font-size:${isMob?'0.65rem':'0.72rem'};font-weight:700;color:${c};padding:0.3rem 0;">${wd}</div>`;
+            html += `<div style="font-size:${isMob ? '0.65rem' : '0.72rem'};font-weight:700;color:${c};padding:0.3rem 0;">${wd}</div>`;
         });
         html += `</div>`;
 
@@ -840,12 +840,12 @@
 
         // 日付セル
         calendarList.forEach(day => {
-            const isToday    = day.date === todayStr;
+            const isToday = day.date === todayStr;
             const isSelected = day.date === state.selectedDate;
-            const isPast     = day.isPast;
-            const isFull     = day.isFull;
+            const isPast = day.isPast;
+            const isFull = day.isFull;
             const isAvailable = day.available && !isPast && !isFull;
-            const hasSlots   = day.slotsCount > 0;
+            const hasSlots = day.slotsCount > 0;
 
             // 曜日
             let dwIdx = 1;
@@ -858,24 +858,24 @@
             const dayColor = dwIdx === 0 ? '#dc2626' : (dwIdx === 6 ? '#0284c7' : '#1f2937');
 
             // ボックス背景・ボーダー
-            let cellBg     = 'white';
+            let cellBg = 'white';
             let cellBorder = '1px solid #e5e7eb';
             let cellShadow = 'none';
             let cellOutline = 'none';
 
             if (isSelected) {
-                cellBg      = th.bgLight;
-                cellBorder  = `2px solid ${th.borderColor}`;
-                cellShadow  = `0 2px 8px rgba(0,0,0,0.1)`;
+                cellBg = th.bgLight;
+                cellBorder = `2px solid ${th.borderColor}`;
+                cellShadow = `0 2px 8px rgba(0,0,0,0.1)`;
                 cellOutline = `0 0 0 2px ${th.ring}`;
             } else if (isAvailable) {
-                cellBg     = '#f0fdf4';
+                cellBg = '#f0fdf4';
                 cellBorder = '1px solid #86efac';
             } else if (isFull) {
-                cellBg     = '#fff1f2';
+                cellBg = '#fff1f2';
                 cellBorder = '1px solid #fca5a5';
             } else if (isPast) {
-                cellBg     = '#f9fafb';
+                cellBg = '#f9fafb';
                 cellBorder = '1px solid #e5e7eb';
             }
 
@@ -950,7 +950,7 @@
 
         const th = getTheme(state.activityId);
         const isStella = state.activityId === ACTIVITIES.STELLA;
-        const isMinna  = state.activityId === ACTIVITIES.MINNA;
+        const isMinna = state.activityId === ACTIVITIES.MINNA;
 
         if (!state.selectedDate) {
             container.innerHTML = `<div style="text-align:center;padding:2rem;color:#9ca3af;font-size:0.85rem;">${t('clickDate')}</div>`;
@@ -972,11 +972,11 @@
         }
 
         const weekdays = t('weekdays');
-        const wdStr = weekdays[dwIdx] || ['日','月','火','水','木','金','土'][dwIdx];
+        const wdStr = weekdays[dwIdx] || ['日', '月', '火', '水', '木', '金', '土'][dwIdx];
 
         let formattedDate = `${dy}年${dm}月${dd}日（${wdStr}）`;
         if (getCurrentLang() === 'en') {
-            const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             formattedDate = `${wdStr}, ${months[dm - 1]} ${dd}, ${dy}`;
         } else if (getCurrentLang() === 'zh') {
             formattedDate = `${dy}年${dm}月${dd}日（${wdStr}）`;
@@ -1012,7 +1012,7 @@
                     remainHtml = `
                         <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;font-weight:700;color:#374151;flex-wrap:wrap;">
                             <span style="color:#065f46;background:#d1fae5;border:1px solid #6ee7b7;padding:0.2rem 0.5rem;border-radius:0.5rem;">
-                                ${t('remainingPrefix')}<span style="font-size:${isMob?'0.95rem':'1rem'};font-weight:900;">${slot.remainingPeople}</span>${t('remainingSuffix')}
+                                ${t('remainingPrefix')}<span style="font-size:${isMob ? '0.95rem' : '1rem'};font-weight:900;">${slot.remainingPeople}</span>${t('remainingSuffix')}
                             </span>
                             <span style="color:#9ca3af;">/</span>
                             <span style="color:#9ca3af;">${t('totalPrefix')}${slot.capacity}${t('totalSuffix')}</span>
@@ -1024,7 +1024,7 @@
                 if (avail) {
                     btnHtml = `
                         <a href="${bookingUrl}" target="_blank" rel="noopener noreferrer"
-                           style="display:flex;align-items:center;justify-content:center;gap:0.5rem;background:${th.btnGrad};color:white;font-weight:700;padding:${isMob?'0.9rem 1rem':'0.75rem 1rem'};border-radius:0.75rem;text-decoration:none;font-size:${isMob?'0.9rem':'0.82rem'};box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.2s;">
+                           style="display:flex;align-items:center;justify-content:center;gap:0.5rem;background:${th.btnGrad};color:white;font-weight:700;padding:${isMob ? '0.9rem 1rem' : '0.75rem 1rem'};border-radius:0.75rem;text-decoration:none;font-size:${isMob ? '0.9rem' : '0.82rem'};box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.2s;">
                             <i class="fa-solid fa-calendar-check"></i>
                             <span>${t('bookNow')}</span>
                             <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.7rem;opacity:0.8;"></i>
@@ -1032,13 +1032,13 @@
                 } else if (full) {
                     btnHtml = `
                         <button type="button" disabled
-                           style="width:100%;background:#e5e7eb;color:#9ca3af;font-weight:700;padding:${isMob?'0.9rem':'0.75rem'} 1rem;border-radius:0.75rem;border:none;font-size:0.85rem;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                           style="width:100%;background:#e5e7eb;color:#9ca3af;font-weight:700;padding:${isMob ? '0.9rem' : '0.75rem'} 1rem;border-radius:0.75rem;border:none;font-size:0.85rem;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
                             <i class="fa-solid fa-ban"></i><span>${t('bookFull')}</span>
                         </button>`;
                 } else {
                     btnHtml = `
                         <button type="button" disabled
-                           style="width:100%;background:#f3f4f6;color:#d1d5db;font-weight:700;padding:${isMob?'0.9rem':'0.75rem'} 1rem;border-radius:0.75rem;border:none;font-size:0.85rem;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                           style="width:100%;background:#f3f4f6;color:#d1d5db;font-weight:700;padding:${isMob ? '0.9rem' : '0.75rem'} 1rem;border-radius:0.75rem;border:none;font-size:0.85rem;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
                             <i class="fa-regular fa-clock"></i><span>${t('bookEnded')}</span>
                         </button>`;
                 }
@@ -1048,14 +1048,14 @@
                         <div style="display:flex;flex-direction:column;gap:0.5rem;">
                             <!-- 時間タグ + ステータス -->
                             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.4rem;">
-                                <span style="background:${th.badgeBg};color:${th.textDark};border:1px solid ${th.badgeBorder};font-size:${isMob?'0.78rem':'0.72rem'};font-weight:700;padding:0.3rem 0.65rem;border-radius:0.5rem;display:flex;align-items:center;gap:0.3rem;">
+                                <span style="background:${th.badgeBg};color:${th.textDark};border:1px solid ${th.badgeBorder};font-size:${isMob ? '0.78rem' : '0.72rem'};font-weight:700;padding:0.3rem 0.65rem;border-radius:0.5rem;display:flex;align-items:center;gap:0.3rem;">
                                     <i class="fa-regular fa-clock"></i>
                                     ${slot.timeRange || ((slot.startTime || '') + ' - ' + (slot.endTime || ''))}
                                 </span>
                                 ${avail ? `<span style="font-size:0.68rem;font-weight:700;color:#065f46;background:#d1fae5;padding:0.2rem 0.6rem;border-radius:9999px;">● ${t('statusAvailable')}</span>` : ''}
                             </div>
                             <!-- タイトル -->
-                            <h4 style="font-family:'Kiwi Maru',serif;font-weight:700;font-size:${isMob?'1rem':'0.95rem'};color:#111827;margin:0;line-height:1.4;">
+                            <h4 style="font-family:'Kiwi Maru',serif;font-weight:700;font-size:${isMob ? '1rem' : '0.95rem'};color:#111827;margin:0;line-height:1.4;">
                                 ${slot.title || '日本語教室 予約枠'}
                             </h4>
                             <!-- 場所 -->
@@ -1073,7 +1073,7 @@
             slotsHtml += `</div>`;
         } else {
             slotsHtml = `
-                <div style="background:#f9fafb;border-radius:0.85rem;border:2px dashed #e5e7eb;padding:${isMob?'1.5rem':'2rem'};text-align:center;margin-top:0.5rem;">
+                <div style="background:#f9fafb;border-radius:0.85rem;border:2px dashed #e5e7eb;padding:${isMob ? '1.5rem' : '2rem'};text-align:center;margin-top:0.5rem;">
                     <div style="width:2.5rem;height:2.5rem;background:#e5e7eb;color:#9ca3af;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 0.6rem;font-size:1.1rem;">
                         <i class="fa-solid fa-calendar-xmark"></i>
                     </div>
@@ -1085,8 +1085,8 @@
             <div>
                 <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
                     <span style="width:0.5rem;height:1.3rem;border-radius:9999px;background:${th.dotColor};display:inline-block;flex-shrink:0;"></span>
-                    <h4 style="font-family:'Kiwi Maru',serif;font-size:${isMob?'0.95rem':'1.05rem'};font-weight:700;color:#111827;margin:0;line-height:1.3;">
-                        ${formattedDate} <span style="font-size:${isMob?'0.78rem':'0.82rem'};font-weight:400;color:#6b7280;">${t('selectedDateTitle')}</span>
+                    <h4 style="font-family:'Kiwi Maru',serif;font-size:${isMob ? '0.95rem' : '1.05rem'};font-weight:700;color:#111827;margin:0;line-height:1.3;">
+                        ${formattedDate} <span style="font-size:${isMob ? '0.78rem' : '0.82rem'};font-weight:400;color:#6b7280;">${t('selectedDateTitle')}</span>
                     </h4>
                 </div>
                 ${slotsHtml}
@@ -1152,8 +1152,8 @@
     // 教室カードボタンとの連携
     // ─────────────────────────────────────────────
     function initCardButtonBindings() {
-        const stellaBtn  = document.getElementById('stellaReserveBtn');
-        const minnaBtn   = document.getElementById('minnaReserveBtn');
+        const stellaBtn = document.getElementById('stellaReserveBtn');
+        const minnaBtn = document.getElementById('minnaReserveBtn');
         const calSection = document.getElementById('calendar-section');
 
         if (stellaBtn && calSection) {
@@ -1191,12 +1191,12 @@
     // 公開 API
     // ─────────────────────────────────────────────
     window.JapaneseClassCalendar = {
-        init:           function () { initCardButtonBindings(); loadCalendar(); },
+        init: function () { initCardButtonBindings(); loadCalendar(); },
         selectActivity: selectActivity,
-        selectDate:     selectDate,
-        changeMonth:    changeMonth,
-        resetToToday:   resetToToday,
-        getState:       function () { return state; }
+        selectDate: selectDate,
+        changeMonth: changeMonth,
+        resetToToday: resetToToday,
+        getState: function () { return state; }
     };
 
     // DOM 完成後に初期化
