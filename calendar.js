@@ -466,38 +466,62 @@
             ? 'background:white;color:#7c2d12;box-shadow:0 1px 3px rgba(0,0,0,.2);'
             : 'background:transparent;color:rgba(255,255,255,0.9);';
 
+        const isMob = window.innerWidth < 640;
+
         root.innerHTML = `
-            <div style="background:white;border-radius:1.5rem;box-shadow:0 20px 40px rgba(0,0,0,.1);border:1px solid #e5e7eb;overflow:hidden;">
+            <style>
+                #cal-root-wrap { background:white;border-radius:${isMob?'1rem':'1.5rem'};box-shadow:0 8px 32px rgba(0,0,0,.10);border:1px solid #e5e7eb;overflow:hidden; }
+                #cal-header { background:${th.headerGrad};padding:${isMob?'0.9rem 1rem':'1.25rem 1.75rem'}; }
+                #cal-header-top { display:flex;flex-direction:column;gap:0.75rem; }
+                #cal-tabs { display:flex;gap:0.3rem;background:rgba(0,0,0,0.2);padding:0.25rem;border-radius:0.85rem;overflow-x:auto;-webkit-overflow-scrolling:touch; }
+                #cal-tabs button { flex-shrink:0;padding:${isMob?'0.45rem 0.6rem':'0.5rem 0.9rem'};border-radius:0.6rem;font-size:${isMob?'0.68rem':'0.72rem'};font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;gap:0.3rem;white-space:nowrap;transition:all 0.2s; }
+                #cal-body { padding:${isMob?'0.9rem 0.75rem':'1.25rem 1.75rem'};display:flex;flex-direction:column;gap:${isMob?'0.9rem':'1.25rem'}; }
+                #cal-nav { display:flex;align-items:center;justify-content:space-between;padding-bottom:${isMob?'0.6rem':'0.75rem'};border-bottom:1px solid #f3f4f6; }
+                #cal-nav-left { display:flex;align-items:center;gap:0.4rem; }
+                #cal-nav-right { display:flex;align-items:center;gap:0.5rem; }
+                #cal-legend { display:flex;align-items:center;gap:0.4rem;font-size:0.65rem;color:#6b7280;background:#f9fafb;padding:0.3rem 0.6rem;border-radius:0.6rem;border:1px solid #e5e7eb; }
+                .cal-nav-btn { width:${isMob?'2.1rem':'2.5rem'};height:${isMob?'2.1rem':'2.5rem'};border-radius:0.65rem;border:1px solid #e5e7eb;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#374151;font-size:${isMob?'0.8rem':'0.9rem'};transition:all 0.15s; }
+                #cal-month-label { font-family:'Kiwi Maru',serif;font-size:${isMob?'1rem':'1.25rem'};font-weight:900;color:#1f2937;min-width:${isMob?'7rem':'8.5rem'};text-align:center; }
+                #cal-today-btn { padding:${isMob?'0.35rem 0.6rem':'0.4rem 0.85rem'};border-radius:0.65rem;border:1px solid #d1d5db;background:white;cursor:pointer;font-size:${isMob?'0.7rem':'0.75rem'};font-weight:700;color:#374151;display:flex;align-items:center;gap:0.3rem;white-space:nowrap;transition:all 0.15s; }
+                .cal-wd-hdr { display:grid;grid-template-columns:repeat(7,1fr);gap:${isMob?'0.2rem':'0.3rem'};margin-bottom:0.4rem;text-align:center; }
+                .cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:${isMob?'0.2rem':'0.3rem'}; }
+                .cal-day-cell { min-height:${isMob?'3.6rem':'5rem'};border-radius:${isMob?'0.6rem':'0.9rem'};padding:${isMob?'0.3rem 0.25rem':'0.45rem 0.4rem'};display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all 0.15s;box-sizing:border-box; }
+                .cal-day-num { font-size:${isMob?'0.78rem':'0.9rem'};font-weight:700;line-height:1; }
+                .cal-today-tag { font-size:${isMob?'0.5rem':'0.58rem'};font-weight:700;background:#f59e0b;color:white;padding:0.05rem 0.3rem;border-radius:0.3rem;flex-shrink:0; }
+                .cal-badge-avail { margin-top:0.2rem;font-size:${isMob?'0.55rem':'0.62rem'};font-weight:700;color:#065f46;background:#d1fae5;border:1px solid #6ee7b7;padding:0.15rem 0.25rem;border-radius:0.4rem;display:flex;align-items:center;justify-content:center;gap:0.2rem;overflow:hidden; }
+                .cal-badge-full { margin-top:0.2rem;font-size:${isMob?'0.55rem':'0.62rem'};font-weight:700;color:#991b1b;background:#fee2e2;border:1px solid #fca5a5;padding:0.15rem 0.25rem;border-radius:0.4rem;text-align:center; }
+                .cal-badge-past { margin-top:0.2rem;font-size:${isMob?'0.55rem':'0.62rem'};color:#9ca3af;background:#f3f4f6;padding:0.15rem 0.25rem;border-radius:0.4rem;text-align:center;font-weight:500; }
+                .cal-badge-none { margin-top:0.2rem;font-size:0.6rem;color:#d1d5db;text-align:center; }
+                .cal-slots-grid { display:grid;grid-template-columns:${isMob?'1fr':'repeat(auto-fill,minmax(260px,1fr))'};gap:${isMob?'0.75rem':'1rem'};margin-top:0.75rem; }
+                .cal-slot-card { background:linear-gradient(135deg,white,${th.bgLight});border-radius:${isMob?'0.85rem':'1rem'};border:1px solid ${th.ring};padding:${isMob?'1rem':'1.1rem'};box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:${isMob?'0.6rem':'0.75rem'};transition:box-shadow 0.2s; }
+            </style>
+            <div id="cal-root-wrap">
                 <!-- ヘッダー -->
-                <div style="background:${th.headerGrad};padding:1.5rem 2rem;">
-                    <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:1rem;">
+                <div id="cal-header">
+                    <div id="cal-header-top">
                         <div>
-                            <div style="display:inline-flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.2);padding:0.2rem 0.75rem;border-radius:9999px;font-size:0.7rem;font-weight:700;color:white;margin-bottom:0.5rem;">
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <span>ONLINE BOOKING</span>
+                            <div style="display:inline-flex;align-items:center;gap:0.35rem;background:rgba(255,255,255,0.2);padding:0.18rem 0.65rem;border-radius:9999px;font-size:0.65rem;font-weight:700;color:white;margin-bottom:0.4rem;">
+                                <i class="fa-solid fa-calendar-days"></i><span>ONLINE BOOKING</span>
                             </div>
-                            <h3 id="cal-heading-title" style="font-family:'Kiwi Maru',serif;font-size:1.4rem;font-weight:900;color:white;margin:0 0 0.3rem;">
+                            <h3 id="cal-heading-title" style="font-family:'Kiwi Maru',serif;font-size:${isMob?'1.1rem':'1.3rem'};font-weight:900;color:white;margin:0 0 0.2rem;">
                                 ${t('title')}
                             </h3>
-                            <p id="cal-heading-sub" style="color:rgba(255,255,255,0.85);font-size:0.78rem;margin:0;max-width:36rem;">
+                            <p id="cal-heading-sub" style="color:rgba(255,255,255,0.85);font-size:${isMob?'0.7rem':'0.75rem'};margin:0;line-height:1.5;">
                                 ${t('subtitle')}
                             </p>
                         </div>
                         <!-- タブ -->
-                        <div style="display:flex;flex-wrap:wrap;gap:0.3rem;background:rgba(0,0,0,0.2);padding:0.3rem;border-radius:1rem;">
-                            <button type="button" id="tab-btn-stella"
-                                style="${stellaTabStyle}padding:0.5rem 0.9rem;border-radius:0.75rem;font-size:0.72rem;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;gap:0.4rem;transition:all 0.2s;">
+                        <div id="cal-tabs">
+                            <button type="button" id="tab-btn-stella" style="${stellaTabStyle}">
                                 <i class="fa-solid fa-graduation-cap"></i>
-                                <span>${t('tabStella')}</span>
+                                <span>${isMob ? 'ステラ' : t('tabStella')}</span>
                             </button>
-                            <button type="button" id="tab-btn-minna"
-                                style="${minnaTabStyle}padding:0.5rem 0.9rem;border-radius:0.75rem;font-size:0.72rem;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;gap:0.4rem;transition:all 0.2s;">
+                            <button type="button" id="tab-btn-minna" style="${minnaTabStyle}">
                                 <i class="fa-solid fa-house-chimney-user"></i>
-                                <span>${t('tabMinna')}</span>
+                                <span>${isMob ? 'みんなのいえ' : t('tabMinna')}</span>
                             </button>
                             ${isCustom ? `
-                            <button type="button" id="tab-btn-custom"
-                                style="background:white;color:#1e1b4b;padding:0.5rem 0.9rem;border-radius:0.75rem;font-size:0.72rem;font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;gap:0.4rem;">
+                            <button type="button" id="tab-btn-custom" style="background:white;color:#1e1b4b;">
                                 <i class="fa-solid fa-calendar-check"></i>
                                 <span>${customTitle}</span>
                             </button>` : ''}
@@ -506,50 +530,42 @@
                 </div>
 
                 <!-- ボディ -->
-                <div style="padding:1.5rem 2rem;display:flex;flex-direction:column;gap:1.5rem;">
+                <div id="cal-body">
                     <!-- 月ナビ -->
-                    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;padding-bottom:0.75rem;border-bottom:1px solid #f3f4f6;">
-                        <div style="display:flex;align-items:center;gap:0.5rem;">
-                            <button type="button" id="cal-prev-month"
-                                style="width:2.5rem;height:2.5rem;border-radius:0.75rem;border:1px solid #e5e7eb;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#374151;transition:all 0.15s;"
-                                aria-label="${t('prevMonth')}">
+                    <div id="cal-nav">
+                        <div id="cal-nav-left">
+                            <button type="button" id="cal-prev-month" class="cal-nav-btn" aria-label="${t('prevMonth')}">
                                 <i class="fa-solid fa-chevron-left"></i>
                             </button>
-                            <span style="font-family:'Kiwi Maru',serif;font-size:1.3rem;font-weight:900;color:#1f2937;min-width:9rem;text-align:center;">
-                                ${monthDisplay}
-                            </span>
-                            <button type="button" id="cal-next-month"
-                                style="width:2.5rem;height:2.5rem;border-radius:0.75rem;border:1px solid #e5e7eb;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#374151;transition:all 0.15s;"
-                                aria-label="${t('nextMonth')}">
+                            <span id="cal-month-label">${monthDisplay}</span>
+                            <button type="button" id="cal-next-month" class="cal-nav-btn" aria-label="${t('nextMonth')}">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
-                        <div style="display:flex;align-items:center;gap:0.75rem;">
-                            <button type="button" id="cal-today-btn"
-                                style="padding:0.4rem 0.9rem;border-radius:0.75rem;border:1px solid #d1d5db;background:white;cursor:pointer;font-size:0.75rem;font-weight:700;color:#374151;display:flex;align-items:center;gap:0.4rem;transition:all 0.15s;">
+                        <div id="cal-nav-right">
+                            <button type="button" id="cal-today-btn">
                                 <i class="fa-regular fa-calendar-check" style="color:${th.borderColor};"></i>
                                 <span>${t('todayBtn')}</span>
                             </button>
-                            <!-- 凡例 -->
-                            <div style="display:flex;align-items:center;gap:0.6rem;font-size:0.7rem;color:#6b7280;background:#f9fafb;padding:0.4rem 0.75rem;border-radius:0.75rem;border:1px solid #e5e7eb;">
-                                <span style="display:flex;align-items:center;gap:0.3rem;">
-                                    <span style="width:0.6rem;height:0.6rem;border-radius:50%;background:#10b981;display:inline-block;"></span>${t('legendAvailable')}
+                            <div id="cal-legend">
+                                <span style="display:flex;align-items:center;gap:0.25rem;">
+                                    <span style="width:0.5rem;height:0.5rem;border-radius:50%;background:#10b981;display:inline-block;flex-shrink:0;"></span>${isMob?'':''+t('legendAvailable')}
                                 </span>
-                                <span style="display:flex;align-items:center;gap:0.3rem;">
-                                    <span style="width:0.6rem;height:0.6rem;border-radius:50%;background:#ef4444;display:inline-block;"></span>${t('legendFull')}
+                                <span style="display:flex;align-items:center;gap:0.25rem;">
+                                    <span style="width:0.5rem;height:0.5rem;border-radius:50%;background:#ef4444;display:inline-block;flex-shrink:0;"></span>${isMob?'':''+t('legendFull')}
                                 </span>
-                                <span style="display:flex;align-items:center;gap:0.3rem;">
-                                    <span style="width:0.6rem;height:0.6rem;border-radius:50%;background:#9ca3af;display:inline-block;"></span>${t('legendPast')}
+                                <span style="display:flex;align-items:center;gap:0.25rem;">
+                                    <span style="width:0.5rem;height:0.5rem;border-radius:50%;background:#9ca3af;display:inline-block;flex-shrink:0;"></span>${isMob?'':''+t('legendPast')}
                                 </span>
                             </div>
                         </div>
                     </div>
 
                     <!-- カレンダーグリッド -->
-                    <div id="calendar-grid-container" style="overflow-x:auto;"></div>
+                    <div id="calendar-grid-container"></div>
 
                     <!-- スロット一覧 -->
-                    <div id="calendar-slots-section" style="padding-top:1rem;border-top:1px solid #f3f4f6;"></div>
+                    <div id="calendar-slots-section" style="padding-top:0.75rem;border-top:1px solid #f3f4f6;"></div>
                 </div>
             </div>
         `;
@@ -588,16 +604,17 @@
 
         const th = getTheme(state.activityId);
         const calendarList = state.monthData.calendar;
+        const isMob = window.innerWidth < 640;
 
         const today = new Date();
         const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
         // 曜日ヘッダー
         const weekdays = t('weekdays');
-        let html = `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:0.3rem;margin-bottom:0.5rem;text-align:center;">`;
+        let html = `<div class="cal-wd-hdr">`;
         weekdays.forEach((wd, i) => {
             const c = i === 0 ? '#dc2626' : (i === 6 ? '#0284c7' : '#6b7280');
-            html += `<div style="font-size:0.72rem;font-weight:700;color:${c};padding:0.4rem 0;">${wd}</div>`;
+            html += `<div style="font-size:${isMob?'0.65rem':'0.72rem'};font-weight:700;color:${c};padding:0.3rem 0;">${wd}</div>`;
         });
         html += `</div>`;
 
@@ -613,11 +630,11 @@
             }
         }
 
-        html += `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:0.3rem;">`;
+        html += `<div class="cal-grid">`;
 
         // パディングセル
         for (let i = 0; i < firstIdx; i++) {
-            html += `<div style="min-height:5.5rem;background:#f9fafb;border-radius:1rem;border:1px dashed #e5e7eb;opacity:0.4;"></div>`;
+            html += `<div class="cal-day-cell" style="background:#f9fafb;border:1px dashed #e5e7eb;opacity:0.4;cursor:default;"></div>`;
         }
 
         // 日付セル
@@ -649,7 +666,7 @@
                 cellBg      = th.bgLight;
                 cellBorder  = `2px solid ${th.borderColor}`;
                 cellShadow  = `0 2px 8px rgba(0,0,0,0.1)`;
-                cellOutline = `0 0 0 3px ${th.ring}`;
+                cellOutline = `0 0 0 2px ${th.ring}`;
             } else if (isAvailable) {
                 cellBg     = '#f0fdf4';
                 cellBorder = '1px solid #86efac';
@@ -664,36 +681,30 @@
             // バッジ
             let badgeHtml = '';
             if (isAvailable) {
-                badgeHtml = `
-                    <div style="margin-top:0.3rem;font-size:0.65rem;font-weight:700;color:#065f46;background:#d1fae5;border:1px solid #6ee7b7;padding:0.2rem 0.4rem;border-radius:0.5rem;display:flex;align-items:center;justify-content:center;gap:0.25rem;overflow:hidden;">
-                        <span style="width:0.4rem;height:0.4rem;border-radius:50%;background:#059669;flex-shrink:0;display:inline-block;"></span>
-                        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${day.statusLabel || t('statusAvailable')}</span>
-                    </div>`;
+                // モバイルは残席数だけ短く表示
+                const label = isMob
+                    ? (day.statusLabel ? day.statusLabel.replace(/[残](\d+)/, '$1') : '○')
+                    : (day.statusLabel || t('statusAvailable'));
+                badgeHtml = `<div class="cal-badge-avail">
+                    <span style="width:0.35rem;height:0.35rem;border-radius:50%;background:#059669;flex-shrink:0;display:inline-block;"></span>
+                    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${label}</span>
+                </div>`;
             } else if (isFull) {
-                badgeHtml = `
-                    <div style="margin-top:0.3rem;font-size:0.65rem;font-weight:700;color:#991b1b;background:#fee2e2;border:1px solid #fca5a5;padding:0.2rem 0.4rem;border-radius:0.5rem;text-align:center;">
-                        ${t('statusFull')}
-                    </div>`;
+                badgeHtml = `<div class="cal-badge-full">${isMob ? '×' : t('statusFull')}</div>`;
             } else if (isPast && hasSlots) {
-                badgeHtml = `
-                    <div style="margin-top:0.3rem;font-size:0.65rem;color:#9ca3af;background:#f3f4f6;padding:0.2rem 0.4rem;border-radius:0.5rem;text-align:center;font-weight:500;">
-                        ${t('statusPast')}
-                    </div>`;
+                badgeHtml = `<div class="cal-badge-past">${isMob ? '-' : t('statusPast')}</div>`;
             } else {
-                badgeHtml = `<div style="margin-top:0.3rem;font-size:0.65rem;color:#d1d5db;text-align:center;">-</div>`;
+                badgeHtml = `<div class="cal-badge-none">·</div>`;
             }
 
-            const todayBadge = isToday ? `
-                <span style="font-size:0.6rem;font-weight:700;background:#f59e0b;color:white;padding:0.1rem 0.4rem;border-radius:0.35rem;flex-shrink:0;">
-                    ${t('todayBadge')}
-                </span>` : '';
+            const todayBadge = isToday
+                ? `<span class="cal-today-tag">${isMob ? '今' : t('todayBadge')}</span>` : '';
 
             html += `
-                <div class="cal-day-cell"
-                     data-date="${day.date}"
-                     style="min-height:5.5rem;border-radius:1rem;${cellBorder ? 'border:' + cellBorder + ';' : ''}background:${cellBg};box-shadow:${cellShadow};outline:${cellOutline};padding:0.5rem;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all 0.15s;box-sizing:border-box;">
+                <div class="cal-day-cell" data-date="${day.date}"
+                     style="border:${cellBorder};background:${cellBg};box-shadow:${cellShadow};outline:${cellOutline};">
                     <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span style="font-size:0.9rem;font-weight:700;color:${dayColor};line-height:1;">${day.day}</span>
+                        <span class="cal-day-num" style="color:${dayColor};">${day.day}</span>
                         ${todayBadge}
                     </div>
                     <div>${badgeHtml}</div>
@@ -709,19 +720,21 @@
                 const d = cell.getAttribute('data-date');
                 if (d) selectDate(d);
             });
-            // ホバーエフェクト
-            cell.addEventListener('mouseenter', () => {
-                if (cell.getAttribute('data-date') !== state.selectedDate) {
-                    cell.style.transform = 'translateY(-2px)';
-                    cell.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-                }
-            });
-            cell.addEventListener('mouseleave', () => {
-                if (cell.getAttribute('data-date') !== state.selectedDate) {
-                    cell.style.transform = '';
-                    cell.style.boxShadow = '';
-                }
-            });
+            // ホバーエフェクト（PC のみ）
+            if (!isMob) {
+                cell.addEventListener('mouseenter', () => {
+                    if (cell.getAttribute('data-date') !== state.selectedDate) {
+                        cell.style.transform = 'translateY(-2px)';
+                        cell.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+                    }
+                });
+                cell.addEventListener('mouseleave', () => {
+                    if (cell.getAttribute('data-date') !== state.selectedDate) {
+                        cell.style.transform = '';
+                        cell.style.boxShadow = '';
+                    }
+                });
+            }
         });
     }
 
@@ -776,9 +789,10 @@
         }
 
         // スロットカード生成
+        const isMob = window.innerWidth < 640;
         let slotsHtml = '';
         if (slots && slots.length > 0) {
-            slotsHtml = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem;">`;
+            slotsHtml = `<div class="cal-slots-grid">`;
             slots.forEach(slot => {
                 const past = slot.isPast;
                 const full = slot.isFull;
@@ -793,9 +807,9 @@
                     remainHtml = `<span style="font-size:0.75rem;color:#6b7280;font-weight:500;">${t('unlimitedCapacity')}</span>`;
                 } else {
                     remainHtml = `
-                        <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;font-weight:700;color:#374151;">
-                            <span style="color:#065f46;background:#d1fae5;border:1px solid #6ee7b7;padding:0.25rem 0.6rem;border-radius:0.5rem;">
-                                ${t('remainingPrefix')}<span style="font-size:0.9rem;font-weight:900;">${slot.remainingPeople}</span>${t('remainingSuffix')}
+                        <div style="display:flex;align-items:center;gap:0.4rem;font-size:0.75rem;font-weight:700;color:#374151;flex-wrap:wrap;">
+                            <span style="color:#065f46;background:#d1fae5;border:1px solid #6ee7b7;padding:0.2rem 0.5rem;border-radius:0.5rem;">
+                                ${t('remainingPrefix')}<span style="font-size:${isMob?'0.95rem':'1rem'};font-weight:900;">${slot.remainingPeople}</span>${t('remainingSuffix')}
                             </span>
                             <span style="color:#9ca3af;">/</span>
                             <span style="color:#9ca3af;">${t('totalPrefix')}${slot.capacity}${t('totalSuffix')}</span>
@@ -807,9 +821,7 @@
                 if (avail) {
                     btnHtml = `
                         <a href="${bookingUrl}" target="_blank" rel="noopener noreferrer"
-                           style="display:flex;align-items:center;justify-content:center;gap:0.5rem;background:${th.btnGrad};color:white;font-weight:700;padding:0.75rem 1rem;border-radius:0.75rem;text-decoration:none;font-size:0.82rem;box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.2s;"
-                           onmouseover="this.style.opacity='0.9';this.style.transform='translateY(-1px)'"
-                           onmouseout="this.style.opacity='1';this.style.transform=''">
+                           style="display:flex;align-items:center;justify-content:center;gap:0.5rem;background:${th.btnGrad};color:white;font-weight:700;padding:${isMob?'0.9rem 1rem':'0.75rem 1rem'};border-radius:0.75rem;text-decoration:none;font-size:${isMob?'0.9rem':'0.82rem'};box-shadow:0 2px 8px rgba(0,0,0,0.15);transition:all 0.2s;">
                             <i class="fa-solid fa-calendar-check"></i>
                             <span>${t('bookNow')}</span>
                             <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.7rem;opacity:0.8;"></i>
@@ -817,36 +829,34 @@
                 } else if (full) {
                     btnHtml = `
                         <button type="button" disabled
-                           style="width:100%;background:#e5e7eb;color:#9ca3af;font-weight:700;padding:0.75rem 1rem;border-radius:0.75rem;border:none;font-size:0.82rem;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                           style="width:100%;background:#e5e7eb;color:#9ca3af;font-weight:700;padding:${isMob?'0.9rem':'0.75rem'} 1rem;border-radius:0.75rem;border:none;font-size:0.85rem;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
                             <i class="fa-solid fa-ban"></i><span>${t('bookFull')}</span>
                         </button>`;
                 } else {
                     btnHtml = `
                         <button type="button" disabled
-                           style="width:100%;background:#f3f4f6;color:#d1d5db;font-weight:700;padding:0.75rem 1rem;border-radius:0.75rem;border:none;font-size:0.82rem;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
+                           style="width:100%;background:#f3f4f6;color:#d1d5db;font-weight:700;padding:${isMob?'0.9rem':'0.75rem'} 1rem;border-radius:0.75rem;border:none;font-size:0.85rem;cursor:not-allowed;display:flex;align-items:center;justify-content:center;gap:0.5rem;">
                             <i class="fa-regular fa-clock"></i><span>${t('bookEnded')}</span>
                         </button>`;
                 }
 
                 slotsHtml += `
-                    <div style="background:linear-gradient(135deg,white,${th.bgLight});border-radius:1rem;border:1px solid ${th.ring};padding:1.25rem;box-shadow:0 2px 8px rgba(0,0,0,0.05);display:flex;flex-direction:column;justify-content:space-between;gap:1rem;transition:box-shadow 0.2s;"
-                         onmouseover="this.style.boxShadow='0 6px 20px rgba(0,0,0,0.1)'"
-                         onmouseout="this.style.boxShadow='0 2px 8px rgba(0,0,0,0.05)'">
-                        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+                    <div class="cal-slot-card">
+                        <div style="display:flex;flex-direction:column;gap:0.5rem;">
                             <!-- 時間タグ + ステータス -->
                             <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.4rem;">
-                                <span style="background:${th.badgeBg};color:${th.textDark};border:1px solid ${th.badgeBorder};font-size:0.72rem;font-weight:700;padding:0.25rem 0.65rem;border-radius:0.5rem;display:flex;align-items:center;gap:0.3rem;">
+                                <span style="background:${th.badgeBg};color:${th.textDark};border:1px solid ${th.badgeBorder};font-size:${isMob?'0.78rem':'0.72rem'};font-weight:700;padding:0.3rem 0.65rem;border-radius:0.5rem;display:flex;align-items:center;gap:0.3rem;">
                                     <i class="fa-regular fa-clock"></i>
                                     ${slot.timeRange || ((slot.startTime || '') + ' - ' + (slot.endTime || ''))}
                                 </span>
                                 ${avail ? `<span style="font-size:0.68rem;font-weight:700;color:#065f46;background:#d1fae5;padding:0.2rem 0.6rem;border-radius:9999px;">● ${t('statusAvailable')}</span>` : ''}
                             </div>
                             <!-- タイトル -->
-                            <h4 style="font-family:'Kiwi Maru',serif;font-weight:700;font-size:1rem;color:#111827;margin:0;line-height:1.4;">
+                            <h4 style="font-family:'Kiwi Maru',serif;font-weight:700;font-size:${isMob?'1rem':'0.95rem'};color:#111827;margin:0;line-height:1.4;">
                                 ${slot.title || '日本語教室 予約枠'}
                             </h4>
                             <!-- 場所 -->
-                            <div style="font-size:0.75rem;color:#6b7280;display:flex;align-items:flex-start;gap:0.4rem;background:rgba(255,255,255,0.7);padding:0.5rem 0.65rem;border-radius:0.6rem;border:1px solid #f3f4f6;">
+                            <div style="font-size:0.75rem;color:#6b7280;display:flex;align-items:flex-start;gap:0.4rem;background:rgba(255,255,255,0.7);padding:0.45rem 0.6rem;border-radius:0.6rem;border:1px solid #f3f4f6;">
                                 <i class="fa-solid fa-location-dot" style="color:${th.borderColor};margin-top:0.1rem;flex-shrink:0;"></i>
                                 <span style="line-height:1.5;">${slot.location || (isStella ? 'ふじみ野ステラ・イースト' : (isMinna ? 'みんなのいえ（亀久保）' : ''))}</span>
                             </div>
@@ -860,8 +870,8 @@
             slotsHtml += `</div>`;
         } else {
             slotsHtml = `
-                <div style="background:#f9fafb;border-radius:1rem;border:2px dashed #e5e7eb;padding:2.5rem;text-align:center;margin-top:0.5rem;">
-                    <div style="width:3rem;height:3rem;background:#e5e7eb;color:#9ca3af;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;font-size:1.25rem;">
+                <div style="background:#f9fafb;border-radius:0.85rem;border:2px dashed #e5e7eb;padding:${isMob?'1.5rem':'2rem'};text-align:center;margin-top:0.5rem;">
+                    <div style="width:2.5rem;height:2.5rem;background:#e5e7eb;color:#9ca3af;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 0.6rem;font-size:1.1rem;">
                         <i class="fa-solid fa-calendar-xmark"></i>
                     </div>
                     <p style="font-size:0.82rem;color:#6b7280;font-weight:500;margin:0;">${t('noSlots')}</p>
@@ -870,10 +880,10 @@
 
         container.innerHTML = `
             <div>
-                <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem;">
-                    <span style="width:0.6rem;height:1.5rem;border-radius:9999px;background:${th.dotColor};display:inline-block;flex-shrink:0;"></span>
-                    <h4 style="font-family:'Kiwi Maru',serif;font-size:1.1rem;font-weight:700;color:#111827;margin:0;">
-                        ${formattedDate} <span style="font-size:0.85rem;font-weight:400;color:#6b7280;">${t('selectedDateTitle')}</span>
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;">
+                    <span style="width:0.5rem;height:1.3rem;border-radius:9999px;background:${th.dotColor};display:inline-block;flex-shrink:0;"></span>
+                    <h4 style="font-family:'Kiwi Maru',serif;font-size:${isMob?'0.95rem':'1.05rem'};font-weight:700;color:#111827;margin:0;line-height:1.3;">
+                        ${formattedDate} <span style="font-size:${isMob?'0.78rem':'0.82rem'};font-weight:400;color:#6b7280;">${t('selectedDateTitle')}</span>
                     </h4>
                 </div>
                 ${slotsHtml}
