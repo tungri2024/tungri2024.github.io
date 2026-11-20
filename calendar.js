@@ -470,58 +470,252 @@
 
         root.innerHTML = `
             <style>
-                #cal-root-wrap { background:white;border-radius:${isMob?'1rem':'1.5rem'};box-shadow:0 8px 32px rgba(0,0,0,.10);border:1px solid #e5e7eb;overflow:hidden; }
-                #cal-header { background:${th.headerGrad};padding:${isMob?'0.9rem 1rem':'1.25rem 1.75rem'}; }
-                #cal-header-top { display:flex;flex-direction:column;gap:0.75rem; }
-                #cal-tabs { display:flex;gap:0.3rem;background:rgba(0,0,0,0.2);padding:0.25rem;border-radius:0.85rem;overflow-x:auto;-webkit-overflow-scrolling:touch; }
-                #cal-tabs button { flex-shrink:0;padding:${isMob?'0.45rem 0.6rem':'0.5rem 0.9rem'};border-radius:0.6rem;font-size:${isMob?'0.68rem':'0.72rem'};font-weight:700;border:none;cursor:pointer;display:flex;align-items:center;gap:0.3rem;white-space:nowrap;transition:all 0.2s; }
-                #cal-body { padding:${isMob?'0.9rem 0.75rem':'1.25rem 1.75rem'};display:flex;flex-direction:column;gap:${isMob?'0.9rem':'1.25rem'}; }
-                #cal-nav { display:flex;align-items:center;justify-content:space-between;padding-bottom:${isMob?'0.6rem':'0.75rem'};border-bottom:1px solid #f3f4f6; }
-                #cal-nav-left { display:flex;align-items:center;gap:0.4rem; }
-                #cal-nav-right { display:flex;align-items:center;gap:0.5rem; }
-                #cal-legend { display:flex;align-items:center;gap:0.4rem;font-size:0.65rem;color:#6b7280;background:#f9fafb;padding:0.3rem 0.6rem;border-radius:0.6rem;border:1px solid #e5e7eb; }
-                .cal-nav-btn { width:${isMob?'2.1rem':'2.5rem'};height:${isMob?'2.1rem':'2.5rem'};border-radius:0.65rem;border:1px solid #e5e7eb;background:white;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#374151;font-size:${isMob?'0.8rem':'0.9rem'};transition:all 0.15s; }
-                #cal-month-label { font-family:'Kiwi Maru',serif;font-size:${isMob?'1rem':'1.25rem'};font-weight:900;color:#1f2937;min-width:${isMob?'7rem':'8.5rem'};text-align:center; }
-                #cal-today-btn { padding:${isMob?'0.35rem 0.6rem':'0.4rem 0.85rem'};border-radius:0.65rem;border:1px solid #d1d5db;background:white;cursor:pointer;font-size:${isMob?'0.7rem':'0.75rem'};font-weight:700;color:#374151;display:flex;align-items:center;gap:0.3rem;white-space:nowrap;transition:all 0.15s; }
-                .cal-wd-hdr { display:grid;grid-template-columns:repeat(7,1fr);gap:${isMob?'0.2rem':'0.3rem'};margin-bottom:0.4rem;text-align:center; }
-                .cal-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:${isMob?'0.2rem':'0.3rem'}; }
-                .cal-day-cell { min-height:${isMob?'3.6rem':'5rem'};border-radius:${isMob?'0.6rem':'0.9rem'};padding:${isMob?'0.3rem 0.25rem':'0.45rem 0.4rem'};display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:all 0.15s;box-sizing:border-box; }
-                .cal-day-num { font-size:${isMob?'0.78rem':'0.9rem'};font-weight:700;line-height:1; }
-                .cal-today-tag { font-size:${isMob?'0.5rem':'0.58rem'};font-weight:700;background:#f59e0b;color:white;padding:0.05rem 0.3rem;border-radius:0.3rem;flex-shrink:0; }
-                .cal-badge-avail { margin-top:0.2rem;font-size:${isMob?'0.55rem':'0.62rem'};font-weight:700;color:#065f46;background:#d1fae5;border:1px solid #6ee7b7;padding:0.15rem 0.25rem;border-radius:0.4rem;display:flex;align-items:center;justify-content:center;gap:0.2rem;overflow:hidden; }
-                .cal-badge-full { margin-top:0.2rem;font-size:${isMob?'0.55rem':'0.62rem'};font-weight:700;color:#991b1b;background:#fee2e2;border:1px solid #fca5a5;padding:0.15rem 0.25rem;border-radius:0.4rem;text-align:center; }
-                .cal-badge-past { margin-top:0.2rem;font-size:${isMob?'0.55rem':'0.62rem'};color:#9ca3af;background:#f3f4f6;padding:0.15rem 0.25rem;border-radius:0.4rem;text-align:center;font-weight:500; }
-                .cal-badge-none { margin-top:0.2rem;font-size:0.6rem;color:#d1d5db;text-align:center; }
-                .cal-slots-grid { display:grid;grid-template-columns:${isMob?'1fr':'repeat(auto-fill,minmax(260px,1fr))'};gap:${isMob?'0.75rem':'1rem'};margin-top:0.75rem; }
-                .cal-slot-card { background:linear-gradient(135deg,white,${th.bgLight});border-radius:${isMob?'0.85rem':'1rem'};border:1px solid ${th.ring};padding:${isMob?'1rem':'1.1rem'};box-shadow:0 2px 8px rgba(0,0,0,.05);display:flex;flex-direction:column;gap:${isMob?'0.6rem':'0.75rem'};transition:box-shadow 0.2s; }
+                #cal-root-wrap { 
+                    background: white; 
+                    border-radius: ${isMob ? '1rem' : '1.5rem'}; 
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+                    border: 1px solid #e5e7eb; 
+                    width: 100%; 
+                    max-width: 100%; 
+                    box-sizing: border-box; 
+                    overflow: hidden; 
+                }
+                #cal-header { 
+                    background: ${th.headerGrad}; 
+                    padding: ${isMob ? '0.85rem 0.9rem' : '1.25rem 1.75rem'}; 
+                    box-sizing: border-box;
+                }
+                #cal-header-top { 
+                    display: flex; 
+                    flex-direction: column; 
+                    gap: 0.6rem; 
+                }
+                #cal-tabs { 
+                    display: grid; 
+                    grid-template-columns: repeat(2, 1fr); 
+                    gap: 0.35rem; 
+                    background: rgba(0,0,0,0.22); 
+                    padding: 0.25rem; 
+                    border-radius: 0.75rem; 
+                    box-sizing: border-box;
+                    width: 100%;
+                }
+                #cal-tabs button { 
+                    width: 100%; 
+                    padding: ${isMob ? '0.45rem 0.3rem' : '0.5rem 0.8rem'}; 
+                    border-radius: 0.55rem; 
+                    font-size: ${isMob ? '0.72rem' : '0.78rem'}; 
+                    font-weight: 700; 
+                    border: none; 
+                    cursor: pointer; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    gap: 0.3rem; 
+                    white-space: nowrap; 
+                    transition: all 0.2s; 
+                    box-sizing: border-box;
+                }
+                #cal-body { 
+                    padding: ${isMob ? '0.75rem 0.6rem' : '1.25rem 1.75rem'}; 
+                    display: flex; 
+                    flex-direction: column; 
+                    gap: ${isMob ? '0.75rem' : '1.25rem'}; 
+                    width: 100%; 
+                    max-width: 100%; 
+                    box-sizing: border-box; 
+                    overflow: hidden;
+                }
+                #cal-nav { 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: space-between; 
+                    flex-wrap: wrap; 
+                    gap: 0.5rem; 
+                    padding-bottom: ${isMob ? '0.5rem' : '0.75rem'}; 
+                    border-bottom: 1px solid #f3f4f6; 
+                    box-sizing: border-box;
+                }
+                #cal-nav-left { 
+                    display: flex; 
+                    align-items: center; 
+                    gap: 0.35rem; 
+                }
+                #cal-nav-right { 
+                    display: flex; 
+                    align-items: center; 
+                    gap: 0.45rem; 
+                }
+                #cal-legend { 
+                    display: flex; 
+                    align-items: center; 
+                    gap: ${isMob ? '0.35rem' : '0.5rem'}; 
+                    font-size: ${isMob ? '0.62rem' : '0.7rem'}; 
+                    color: #6b7280; 
+                    background: #f9fafb; 
+                    padding: 0.25rem 0.5rem; 
+                    border-radius: 0.5rem; 
+                    border: 1px solid #e5e7eb; 
+                    white-space: nowrap;
+                }
+                .cal-nav-btn { 
+                    width: ${isMob ? '2rem' : '2.4rem'}; 
+                    height: ${isMob ? '2rem' : '2.4rem'}; 
+                    border-radius: 0.6rem; 
+                    border: 1px solid #e5e7eb; 
+                    background: white; 
+                    cursor: pointer; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    color: #374151; 
+                    font-size: ${isMob ? '0.75rem' : '0.85rem'}; 
+                    transition: all 0.15s; 
+                    flex-shrink: 0;
+                }
+                #cal-month-label { 
+                    font-family: 'Kiwi Maru', serif; 
+                    font-size: ${isMob ? '1.05rem' : '1.25rem'}; 
+                    font-weight: 900; 
+                    color: #1f2937; 
+                    min-width: ${isMob ? '5.5rem' : '8rem'}; 
+                    text-align: center; 
+                    white-space: nowrap;
+                }
+                #cal-today-btn { 
+                    padding: ${isMob ? '0.3rem 0.55rem' : '0.4rem 0.85rem'}; 
+                    border-radius: 0.55rem; 
+                    border: 1px solid #d1d5db; 
+                    background: white; 
+                    cursor: pointer; 
+                    font-size: ${isMob ? '0.68rem' : '0.75rem'}; 
+                    font-weight: 700; 
+                    color: #374151; 
+                    display: flex; 
+                    align-items: center; 
+                    gap: 0.25rem; 
+                    white-space: nowrap; 
+                    transition: all 0.15s; 
+                }
+                /* 星期标题行：7列等宽，严禁滑动 */
+                .cal-wd-hdr { 
+                    display: grid; 
+                    grid-template-columns: repeat(7, minmax(0, 1fr)); 
+                    gap: ${isMob ? '3px' : '6px'}; 
+                    margin-bottom: 4px; 
+                    text-align: center; 
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+                /* 日历网格：7列严格等宽，禁止水平滚动 */
+                .cal-grid { 
+                    display: grid; 
+                    grid-template-columns: repeat(7, minmax(0, 1fr)); 
+                    gap: ${isMob ? '3px' : '6px'}; 
+                    width: 100%; 
+                    box-sizing: border-box;
+                }
+                /* 每个单元格：严格固定高宽尺寸，彻底解决大小不一问题 */
+                .cal-day-cell { 
+                    height: ${isMob ? '48px' : '66px'}; 
+                    max-height: ${isMob ? '48px' : '66px'}; 
+                    border-radius: ${isMob ? '0.45rem' : '0.75rem'}; 
+                    padding: ${isMob ? '3px 2px' : '5px 4px'}; 
+                    display: flex; 
+                    flex-direction: column; 
+                    align-items: center; 
+                    justify-content: space-between; 
+                    cursor: pointer; 
+                    transition: all 0.15s; 
+                    box-sizing: border-box; 
+                    width: 100%; 
+                    overflow: hidden; 
+                    user-select: none;
+                }
+                .cal-day-num { 
+                    font-size: ${isMob ? '0.82rem' : '0.92rem'}; 
+                    font-weight: 700; 
+                    line-height: 1; 
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: ${isMob ? '20px' : '26px'};
+                    height: ${isMob ? '20px' : '26px'};
+                    border-radius: 50%;
+                }
+                .cal-day-num.is-today-circle {
+                    background: #f59e0b;
+                    color: white !important;
+                }
+                .cal-status-row {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: ${isMob ? '14px' : '20px'};
+                }
+                .cal-dot {
+                    width: ${isMob ? '6px' : '8px'};
+                    height: ${isMob ? '6px' : '8px'};
+                    border-radius: 50%;
+                    display: inline-block;
+                    flex-shrink: 0;
+                }
+                .cal-text-pill {
+                    font-size: 0.62rem;
+                    font-weight: 700;
+                    padding: 0.1rem 0.35rem;
+                    border-radius: 9999px;
+                    line-height: 1;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .cal-slots-grid { 
+                    display: grid; 
+                    grid-template-columns: ${isMob ? '1fr' : 'repeat(auto-fill, minmax(260px, 1fr))'}; 
+                    gap: ${isMob ? '0.65rem' : '1rem'}; 
+                    margin-top: 0.6rem; 
+                }
+                .cal-slot-card { 
+                    background: linear-gradient(135deg, white, ${th.bgLight}); 
+                    border-radius: 0.85rem; 
+                    border: 1px solid ${th.ring}; 
+                    padding: ${isMob ? '0.9rem' : '1.1rem'}; 
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+                    display: flex; 
+                    flex-direction: column; 
+                    gap: ${isMob ? '0.55rem' : '0.75rem'}; 
+                    box-sizing: border-box;
+                }
             </style>
             <div id="cal-root-wrap">
                 <!-- ヘッダー -->
                 <div id="cal-header">
                     <div id="cal-header-top">
                         <div>
-                            <div style="display:inline-flex;align-items:center;gap:0.35rem;background:rgba(255,255,255,0.2);padding:0.18rem 0.65rem;border-radius:9999px;font-size:0.65rem;font-weight:700;color:white;margin-bottom:0.4rem;">
+                            <div style="display:inline-flex;align-items:center;gap:0.3rem;background:rgba(255,255,255,0.22);padding:0.18rem 0.55rem;border-radius:9999px;font-size:0.65rem;font-weight:700;color:white;margin-bottom:0.35rem;">
                                 <i class="fa-solid fa-calendar-days"></i><span>ONLINE BOOKING</span>
                             </div>
-                            <h3 id="cal-heading-title" style="font-family:'Kiwi Maru',serif;font-size:${isMob?'1.1rem':'1.3rem'};font-weight:900;color:white;margin:0 0 0.2rem;">
+                            <h3 id="cal-heading-title" style="font-family:'Kiwi Maru',serif;font-size:${isMob ? '1.15rem' : '1.35rem'};font-weight:900;color:white;margin:0 0 0.15rem;">
                                 ${t('title')}
                             </h3>
-                            <p id="cal-heading-sub" style="color:rgba(255,255,255,0.85);font-size:${isMob?'0.7rem':'0.75rem'};margin:0;line-height:1.5;">
+                            <p id="cal-heading-sub" style="color:rgba(255,255,255,0.88);font-size:${isMob ? '0.72rem' : '0.78rem'};margin:0;line-height:1.45;">
                                 ${t('subtitle')}
                             </p>
                         </div>
-                        <!-- タブ -->
+                        <!-- 教室切り替えタブ（2列固定で横スクロール不要） -->
                         <div id="cal-tabs">
                             <button type="button" id="tab-btn-stella" style="${stellaTabStyle}">
                                 <i class="fa-solid fa-graduation-cap"></i>
-                                <span>${isMob ? 'ステラ' : t('tabStella')}</span>
+                                <span>${isMob ? 'ステラ・イースト' : t('tabStella')}</span>
                             </button>
                             <button type="button" id="tab-btn-minna" style="${minnaTabStyle}">
                                 <i class="fa-solid fa-house-chimney-user"></i>
                                 <span>${isMob ? 'みんなのいえ' : t('tabMinna')}</span>
                             </button>
                             ${isCustom ? `
-                            <button type="button" id="tab-btn-custom" style="background:white;color:#1e1b4b;">
+                            <button type="button" id="tab-btn-custom" style="background:white;color:#1e1b4b;grid-column: span 2;">
                                 <i class="fa-solid fa-calendar-check"></i>
                                 <span>${customTitle}</span>
                             </button>` : ''}
@@ -531,7 +725,7 @@
 
                 <!-- ボディ -->
                 <div id="cal-body">
-                    <!-- 月ナビ -->
+                    <!-- ナビゲーション（前月・翌月・今月・凡例） -->
                     <div id="cal-nav">
                         <div id="cal-nav-left">
                             <button type="button" id="cal-prev-month" class="cal-nav-btn" aria-label="${t('prevMonth')}">
@@ -549,23 +743,26 @@
                             </button>
                             <div id="cal-legend">
                                 <span style="display:flex;align-items:center;gap:0.25rem;">
-                                    <span style="width:0.5rem;height:0.5rem;border-radius:50%;background:#10b981;display:inline-block;flex-shrink:0;"></span>${isMob?'':''+t('legendAvailable')}
+                                    <span class="cal-dot" style="background:#10b981;"></span>
+                                    <span>${isMob ? '空き' : t('legendAvailable')}</span>
                                 </span>
                                 <span style="display:flex;align-items:center;gap:0.25rem;">
-                                    <span style="width:0.5rem;height:0.5rem;border-radius:50%;background:#ef4444;display:inline-block;flex-shrink:0;"></span>${isMob?'':''+t('legendFull')}
+                                    <span class="cal-dot" style="background:#ef4444;"></span>
+                                    <span>${isMob ? '満席' : t('legendFull')}</span>
                                 </span>
                                 <span style="display:flex;align-items:center;gap:0.25rem;">
-                                    <span style="width:0.5rem;height:0.5rem;border-radius:50%;background:#9ca3af;display:inline-block;flex-shrink:0;"></span>${isMob?'':''+t('legendPast')}
+                                    <span class="cal-dot" style="background:#9ca3af;"></span>
+                                    <span>${isMob ? '終了' : t('legendPast')}</span>
                                 </span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- カレンダーグリッド -->
-                    <div id="calendar-grid-container"></div>
+                    <!-- カレンダーグリッド（横スクロール禁止・固定サイズ） -->
+                    <div id="calendar-grid-container" style="width:100%;box-sizing:border-box;"></div>
 
                     <!-- スロット一覧 -->
-                    <div id="calendar-slots-section" style="padding-top:0.75rem;border-top:1px solid #f3f4f6;"></div>
+                    <div id="calendar-slots-section" style="padding-top:0.65rem;border-top:1px solid #f3f4f6;"></div>
                 </div>
             </div>
         `;
@@ -632,9 +829,13 @@
 
         html += `<div class="cal-grid">`;
 
-        // パディングセル
+        // パディングセル（空格结构完全相同，确保高度严格一致）
         for (let i = 0; i < firstIdx; i++) {
-            html += `<div class="cal-day-cell" style="background:#f9fafb;border:1px dashed #e5e7eb;opacity:0.4;cursor:default;"></div>`;
+            html += `
+                <div class="cal-day-cell" style="background:#fafafa;border:1px dashed #f0f0f0;opacity:0.3;cursor:default;">
+                    <span class="cal-day-num" style="visibility:hidden;">0</span>
+                    <div class="cal-status-row"></div>
+                </div>`;
         }
 
         // 日付セル
@@ -678,36 +879,38 @@
                 cellBorder = '1px solid #e5e7eb';
             }
 
-            // バッジ
-            let badgeHtml = '';
+            // 状态指示器：固定高度容器，保证所有格子高度严格一致
+            let statusIndicatorHtml = '';
             if (isAvailable) {
-                // モバイルは残席数だけ短く表示
-                const label = isMob
-                    ? (day.statusLabel ? day.statusLabel.replace(/[残](\d+)/, '$1') : '○')
-                    : (day.statusLabel || t('statusAvailable'));
-                badgeHtml = `<div class="cal-badge-avail">
-                    <span style="width:0.35rem;height:0.35rem;border-radius:50%;background:#059669;flex-shrink:0;display:inline-block;"></span>
-                    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${label}</span>
-                </div>`;
+                if (isMob) {
+                    statusIndicatorHtml = `<span class="cal-dot" style="background:#10b981;"></span>`;
+                } else {
+                    const label = day.statusLabel || t('statusAvailable');
+                    statusIndicatorHtml = `<span class="cal-text-pill" style="color:#065f46;background:#d1fae5;border:1px solid #6ee7b7;">● ${label}</span>`;
+                }
             } else if (isFull) {
-                badgeHtml = `<div class="cal-badge-full">${isMob ? '×' : t('statusFull')}</div>`;
+                if (isMob) {
+                    statusIndicatorHtml = `<span class="cal-dot" style="background:#ef4444;"></span>`;
+                } else {
+                    statusIndicatorHtml = `<span class="cal-text-pill" style="color:#991b1b;background:#fee2e2;border:1px solid #fca5a5;">${t('statusFull')}</span>`;
+                }
             } else if (isPast && hasSlots) {
-                badgeHtml = `<div class="cal-badge-past">${isMob ? '-' : t('statusPast')}</div>`;
+                if (isMob) {
+                    statusIndicatorHtml = `<span class="cal-dot" style="background:#d1d5db;"></span>`;
+                } else {
+                    statusIndicatorHtml = `<span class="cal-text-pill" style="color:#9ca3af;background:#f3f4f6;">${t('statusPast')}</span>`;
+                }
             } else {
-                badgeHtml = `<div class="cal-badge-none">·</div>`;
+                statusIndicatorHtml = `<span style="display:inline-block;height:6px;"></span>`;
             }
 
-            const todayBadge = isToday
-                ? `<span class="cal-today-tag">${isMob ? '今' : t('todayBadge')}</span>` : '';
+            const todayClass = isToday ? 'is-today-circle' : '';
 
             html += `
                 <div class="cal-day-cell" data-date="${day.date}"
                      style="border:${cellBorder};background:${cellBg};box-shadow:${cellShadow};outline:${cellOutline};">
-                    <div style="display:flex;align-items:center;justify-content:space-between;">
-                        <span class="cal-day-num" style="color:${dayColor};">${day.day}</span>
-                        ${todayBadge}
-                    </div>
-                    <div>${badgeHtml}</div>
+                    <span class="cal-day-num ${todayClass}" style="color:${dayColor};">${day.day}</span>
+                    <div class="cal-status-row">${statusIndicatorHtml}</div>
                 </div>`;
         });
 
@@ -970,10 +1173,18 @@
     }
 
     // ─────────────────────────────────────────────
-    // 言語切り替え連携
+    // 言語切り替え・リサイズ連携
     // ─────────────────────────────────────────────
     window.addEventListener('languageChanged', () => {
         if (state.monthData) renderFullComponent();
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (state.monthData) renderFullComponent();
+        }, 200);
     });
 
     // ─────────────────────────────────────────────
